@@ -1,10 +1,39 @@
 "use client";
 
 import { useId } from "react";
+import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
-import Image from "next/image";
 import { FaCheck } from "react-icons/fa";
+
+const ALTURA_IMAGEM = 380; // altura fixa da área da imagem
+const ALTURA_INFO = 170; // altura fixa da parte preta
+const ALTURA_CARD = ALTURA_IMAGEM + ALTURA_INFO;
+
+const CARDS = [
+  {
+    titulo: "Planejamento Estratégico",
+    descricao: "Consultoria para otimizar fluxos de caixa e crescimento.",
+    imagem: "/yuri.jpg",
+    objectPosition: "50% 30%",
+    zoom: 1.14,
+  },
+  {
+    titulo: "Suporte Personalizado",
+    descricao: "Comunicação direta para dúvidas e orientações estratégicas eficazes.",
+    imagem:
+      "https://barralcontabilidade.com.br/wp-content/uploads/2025/08/Home-Barral-Contabilidade-em-Recife-PE-Img-2-2.webp",
+    objectPosition: "50% 28%",
+    zoom: 1,
+  },
+  {
+    titulo: "Inovação Tecnológica",
+    descricao: "Utilizando a tecnologia para simplificar a contabilidade.",
+    imagem: "/lucas.jpg",
+    objectPosition: "50% 22%",
+    zoom: 1,
+  },
+];
 
 const GRAFICOS = [
   { valor: 100, label: "de dedicação" },
@@ -13,18 +42,6 @@ const GRAFICOS = [
 ];
 
 const CIRCUNFERENCIA = 2 * Math.PI * 46;
-
-// URLs das imagens
-const IMG_PLANEJAMENTO =
-  "https://barralcontabilidade.com.br/wp-content/uploads/2025/08/Home-Barral-Contabilidade-em-Recife-PE-Img-4-2.webp";
-const IMG_SUPORTE =
-  "https://barralcontabilidade.com.br/wp-content/uploads/2025/08/Home-Barral-Contabilidade-em-Recife-PE-Img-2-2.webp";
-const IMG_INOVACAO =
-  "https://barralcontabilidade.com.br/wp-content/uploads/2025/08/Home-Barral-Contabilidade-em-Recife-PE-Img-5-3.webp";
-
-// Alturas padronizadas
-const ALTURA_CARD = 550;
-const ALTURA_SECAO_PRETA = 180;
 
 function GraficoCircular({
   valor,
@@ -38,8 +55,6 @@ function GraficoCircular({
   delayMs?: number;
 }) {
   const offset = CIRCUNFERENCIA - (valor / 100) * CIRCUNFERENCIA;
-
-  // ID único para evitar conflito de gradiente no SVG
   const gradId = useId().replace(/:/g, "");
 
   return (
@@ -60,10 +75,10 @@ function GraficoCircular({
             </linearGradient>
           </defs>
 
-          {/* Trilha base */}
+          {/* trilha base */}
           <circle cx="55" cy="55" r="46" fill="none" stroke="#EDEDED" strokeWidth="8" />
 
-          {/* Progresso animado */}
+          {/* progresso */}
           <circle
             cx="55"
             cy="55"
@@ -80,7 +95,7 @@ function GraficoCircular({
           />
         </svg>
 
-        {/* Número animado */}
+        {/* número */}
         <span
           className="absolute inset-0 flex items-center justify-center text-xl font-bold text-primary"
           style={{
@@ -104,130 +119,70 @@ function GraficoCircular({
   );
 }
 
-export default function Vantagens() {
+export default function CardsDiferenciais() {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.05,
+    threshold: 0.15,
   });
 
   return (
-    <section className="section-padding bg-[#f7f8fa]" ref={ref}>
+    <section ref={ref} className="py-16 bg-[#f3f4f6]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* =========================================================
-            1) IMAGENS EM CIMA
-        ========================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-16">
-          {/* Card principal (esquerda) */}
-          <article
-            className="lg:col-span-5 rounded-2xl overflow-hidden shadow-lg bg-[#070b10] flex flex-col"
-            style={{
-              height: ALTURA_CARD,
-              opacity: inView ? 1 : 0,
-              transform: inView ? "translateY(0)" : "translateY(40px)",
-              transition: "opacity 0.7s ease, transform 0.7s ease",
-              transitionDelay: "0ms",
-            }}
-          >
-            <div className="relative w-full flex-1 min-h-[380px]">
-              <Image
-                src={IMG_PLANEJAMENTO}
-                alt="Planejamento Estratégico"
-                fill
-                className="object-cover object-center"
-              />
-            </div>
-
-            <div
-              className="px-6 py-6 flex flex-col items-center justify-center text-center gap-3 bg-[#070b10]"
-              style={{ height: ALTURA_SECAO_PRETA }}
-            >
-              <div className="w-11 h-11 rounded-full border-2 border-secondary flex items-center justify-center">
-                <FaCheck className="text-secondary text-sm" />
-              </div>
-              <h4 className="text-sm font-bold text-white leading-snug">Planejamento Estratégico</h4>
-              <p className="text-xs text-white/65 leading-relaxed">
-                Consultoria para otimizar fluxos de caixa e crescimento.
-              </p>
-            </div>
-          </article>
-
-          {/* Coluna direita com 2 cards */}
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Card 2 */}
+        {/* 1) CARDS DE IMAGEM */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center mb-16">
+          {CARDS.map((card, i) => (
             <article
-              className="rounded-2xl overflow-hidden shadow-lg bg-[#070b10] flex flex-col"
+              key={i}
+              className="w-full max-w-[360px] rounded-2xl overflow-hidden shadow-lg bg-[#070b10] flex flex-col"
               style={{
                 height: ALTURA_CARD,
                 opacity: inView ? 1 : 0,
-                transform: inView ? "translateY(0)" : "translateY(40px)",
+                transform: inView ? "translateY(0)" : "translateY(30px)",
                 transition: "opacity 0.7s ease, transform 0.7s ease",
-                transitionDelay: "120ms",
+                transitionDelay: "0ms", // sem cascata
               }}
             >
-              <div className="relative w-full flex-1 min-h-[380px]">
+              {/* imagem */}
+              <div
+                className="relative w-full overflow-hidden shrink-0"
+                style={{ height: ALTURA_IMAGEM }}
+              >
                 <Image
-                  src={IMG_SUPORTE}
-                  alt="Suporte Personalizado"
+                  src={card.imagem}
+                  alt={card.titulo}
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
+                  style={{
+                    objectPosition: card.objectPosition,
+                    transform: `scale(${card.zoom})`,
+                    transformOrigin: "center",
+                  }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
+                  priority={i === 0}
                 />
               </div>
 
+              {/* parte preta */}
               <div
-                className="px-6 py-6 flex flex-col items-center justify-center text-center gap-3 bg-[#070b10]"
-                style={{ height: ALTURA_SECAO_PRETA }}
+                className="bg-[#020b17] px-6 py-6 text-center flex flex-col items-center justify-center gap-3 shrink-0"
+                style={{ height: ALTURA_INFO }}
               >
-                <div className="w-11 h-11 rounded-full border-2 border-secondary flex items-center justify-center">
-                  <FaCheck className="text-secondary text-sm" />
+                <div className="w-11 h-11 rounded-full border-2 border-cyan-500 flex items-center justify-center">
+                  <FaCheck className="text-cyan-500 text-sm" />
                 </div>
-                <h4 className="text-sm font-bold text-white leading-snug">Suporte Personalizado</h4>
-                <p className="text-xs text-white/65 leading-relaxed">
-                  Comunicação direta para dúvidas e orientações estratégicas eficazes.
+
+                <h4 className="text-sm font-bold text-white leading-snug">{card.titulo}</h4>
+
+                <p className="text-xs text-white/75 leading-relaxed max-w-[280px]">
+                  {card.descricao}
                 </p>
               </div>
             </article>
-
-            {/* Card 3 */}
-            <article
-              className="rounded-2xl overflow-hidden shadow-lg bg-[#070b10] flex flex-col"
-              style={{
-                height: ALTURA_CARD,
-                opacity: inView ? 1 : 0,
-                transform: inView ? "translateY(0)" : "translateY(40px)",
-                transition: "opacity 0.7s ease, transform 0.7s ease",
-                transitionDelay: "240ms",
-              }}
-            >
-              <div className="relative w-full flex-1 min-h-[380px]">
-                <Image
-                  src={IMG_INOVACAO}
-                  alt="Inovação Tecnológica"
-                  fill
-                  className="object-cover object-top"
-                />
-              </div>
-
-              <div
-                className="px-6 py-6 flex flex-col items-center justify-center text-center gap-3 bg-[#070b10]"
-                style={{ height: ALTURA_SECAO_PRETA }}
-              >
-                <div className="w-11 h-11 rounded-full border-2 border-secondary flex items-center justify-center">
-                  <FaCheck className="text-secondary text-sm" />
-                </div>
-                <h4 className="text-sm font-bold text-white leading-snug">Inovação Tecnológica</h4>
-                <p className="text-xs text-white/65 leading-relaxed">
-                  Utilizando a tecnologia para simplificar a contabilidade.
-                </p>
-              </div>
-            </article>
-          </div>
+          ))}
         </div>
 
-        {/* =========================================================
-            2) TEXTO + GRÁFICOS EMBAIXO
-        ========================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Texto */}
+        {/* 2) TEXTO + GRÁFICOS */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div
             style={{
               opacity: inView ? 1 : 0,
@@ -253,18 +208,23 @@ export default function Vantagens() {
             </div>
           </div>
 
-          {/* Gráficos */}
           <div
-            className="grid grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-8"
             style={{
               opacity: inView ? 1 : 0,
               transform: inView ? "translateY(0)" : "translateY(32px)",
               transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
             }}
           >
-            <GraficoCircular valor={100} label="de dedicação" ativo={inView} delayMs={0} />
-            <GraficoCircular valor={98} label="de aprovação" ativo={inView} delayMs={180} />
-            <GraficoCircular valor={25} label="de crescimento por ano" ativo={inView} delayMs={360} />
+            {GRAFICOS.map((g, index) => (
+              <GraficoCircular
+                key={g.label}
+                valor={g.valor}
+                label={g.label}
+                ativo={inView}
+                delayMs={index * 180}
+              />
+            ))}
           </div>
         </div>
       </div>

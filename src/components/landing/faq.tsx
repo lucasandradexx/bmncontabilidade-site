@@ -68,7 +68,7 @@ export default function FAQ() {
               <button
                 onClick={() => setAberto(aberto === i ? null : i)}
                 className="w-full flex items-center justify-between text-left
-                           px-6 py-5 hover:bg-gray-50 transition-colors duration-200"
+                           px-6 py-5 hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
               >
                 <span
                   className={`text-sm md:text-base font-semibold transition-colors duration-200

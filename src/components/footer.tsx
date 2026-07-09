@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 
 const WA_LINK =
-  "https://wa.me/558197058083?text=Ol%C3%A1!%20Encontrei%20seu%20site%20atrav%C3%A9s%20do%20Google%20e%20estou%20interessado(a)%20em%20saber%20mais%20sobre%20seus%20servi%C3%A7os.%20Poderia%20me%20fornecer%20mais%20informa%C3%A7%C3%B5es,%20por%20favor?";
+  "https://wa.me/558194725310?text=Ol%C3%A1!%20Encontrei%20seu%20site%20atrav%C3%A9s%20do%20Google%20e%20estou%20interessado(a)%20em%20saber%20mais%20sobre%20seus%20servi%C3%A7os.%20Poderia%20me%20fornecer%20mais%20informa%C3%A7%C3%B5es,%20por%20favor?";
 
 const NAV_LINKS = [
   { label: "Início",                        href: "#inicio"         },
@@ -44,7 +44,7 @@ export default function Footer() {
           <div className="xl:col-span-1">
             <Link href="/">
               <Image
-                src="logo-bmn-white.svg"
+                src="/logo-bmn-white.svg"
                 alt="BMN Contabilidade"
                 width={395.041}
                 height={202.668}
@@ -72,8 +72,7 @@ export default function Footer() {
                            hover:text-secondary transition-colors"
               >
                 <FaWhatsapp className="text-secondary text-base flex-shrink-0" />
-                (81) 99705-8083
-              </Link>
+                (81) 99472-5310              </Link>
 
               <Link
                 href="mailto:contato@bmncontabilidade.com"
@@ -91,7 +90,7 @@ export default function Footer() {
 
               <div className="flex items-start gap-3 text-sm text-white/70">
                 <FaMapMarkerAlt className="text-secondary text-base flex-shrink-0 mt-0.5" />
-                R. Francisco Alves, 75 - Ilha do Leite, Recife - PE
+                R. Cap. José da Luz, 25 – Coelhos, Recife/PE – CEP 50070-540 Empresarial Joaquim Cardoso, salas 505/506
               </div>
             </div>
           </div>
@@ -158,7 +157,8 @@ export default function Footer() {
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary flex items-center gap-2 !text-sm !px-5 !py-3"
+              className="btn btn-primary flex items-center justify-center
+                         gap-2 !text-sm !px-5 !py-3 mt-3 w-full"
             >
               <FaWhatsapp className="text-base" />
               Falar no WhatsApp

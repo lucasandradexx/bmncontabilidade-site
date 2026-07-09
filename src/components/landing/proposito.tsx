@@ -93,12 +93,10 @@ export default function Proposito() {
               style={{ height: 500 }}
             >
               <Image
-                src="https://barralcontabilidade.com.br/wp-content/uploads/2025/08/Home-Barral-Contabilidade-em-Recife-PE-Img-5-3.webp"
+                src="/equipe.jpg"
                 alt="Ingrid barral — Fundadora da barral Contabilidade"
                 fill
                 className="object-cover object-center"
-                /* ✅ Espelho horizontal — igual ao Elementor flipX do original */
-                style={{ transform: "scaleX(-1)" }}
               />
             </div>
           </div>

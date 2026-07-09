@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { FaStore, FaHeadset, FaUserTie } from "react-icons/fa";
 import { ReactNode } from "react";
 
-const WA_LINK = "https://wa.me/558197058083";
+const WA_LINK = "https://wa.me/558194725310";
 
 interface Card {
   icone:    ReactNode;

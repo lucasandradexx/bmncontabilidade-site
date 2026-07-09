@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 
-const WA_LINK = "https://wa.me/558197058083";
+const WA_LINK = "https://wa.me/558194725310";
 
 export default function Sobre() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.15 });
@@ -45,33 +45,50 @@ export default function Sobre() {
             <strong className="text-primary font-semibold">
               BMN Contabilidade Estratégica
             </strong>{" "}
-            nasceu do sonho da fundadora{" "}
-            <strong className="text-primary font-semibold">Ingrid barral</strong>,
-            uma profissional determinada, apaixonada pelo mundo dos negócios e das finanças.
-            Com formação sólida e MBA em Contabilidade, Auditoria e Gestão Tributária,
-            construiu sua trajetória pautada em objetividade, precisão técnica, visão
-            estratégica e tecnologia.
+            nasce da união de duas forças do mercado pernambucano:{" "}
+            <strong className="text-primary font-semibold">
+              Barral Contabilidade
+            </strong>{" "}
+            e{" "}
+            <strong className="text-primary font-semibold">
+              MN Soluções Empresariais
+            </strong>
+            . Liderada por três profissionais determinados e apaixonados pelo universo
+            dos negócios e das finanças, a BMN comprova que{" "}
+            <strong className="text-primary font-semibold">
+              grandes histórias corporativas começam com a união de propósitos
+            </strong>
+            . Com mais de 10 anos de atuação e a bagagem de dois escritórios
+            consolidados, assumimos o compromisso de{" "}
+            <strong className="text-primary font-semibold">
+              proteger e prosperar o seu patrimônio
+            </strong>{" "}
+            com responsabilidade e visão estratégica.
           </p>
 
           <p>
-            Fundada com o propósito de ir além da contabilidade tradicional, a BMN
-            investe em tecnologia de ponta, automação de processos, soluções personalizadas
-            e indicadores financeiros inteligentes.{" "}
+            Nossa atuação é completa e integrada, com excelência em{" "}
             <strong className="text-primary font-semibold">
-              Entendemos a contabilidade como uma ferramenta estratégica e poderosa para
-              a tomada de decisão.
-            </strong>{" "}
-            Nossa atuação une automação, sistemas modernos e monitoramento fiscal contínuo,
-            garantindo agilidade, previsibilidade e controle.
+              contabilidade, auditoria, gestão tributária e estruturação societária
+            </strong>
+            , além de uma gestão financeira robusta e um departamento pessoal de alta
+            performance. Fundada para ir além do modelo tradicional, a BMN investe em{" "}
+            <strong className="text-primary font-semibold">
+              tecnologia de ponta, inteligência de processos e soluções personalizadas
+            </strong>
+            .
           </p>
 
           <p>
+            Unimos precisão contábil e controle financeiro como pilares para{" "}
             <strong className="text-primary font-semibold">
-              Unimos tradição, sensibilidade e inovação
-            </strong>{" "}
-            para sermos mais que um escritório contábil: somos um{" "}
+              decisões seguras, previsibilidade e governança
+            </strong>
+            . Com monitoramento fiscal contínuo e indicadores inteligentes, entregamos
+            agilidade e confiança para o crescimento do seu negócio.{" "}
             <strong className="text-primary font-semibold">
-              braço estratégico na construção de negócios de sucesso.
+              Mais do que um prestador de serviços, a BMN é o alicerce estratégico na
+              construção de grandes histórias de sucesso.
             </strong>
           </p>
         </div>
