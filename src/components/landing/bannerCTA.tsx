@@ -56,7 +56,7 @@ export default function BannerCTA({
             href={href}
             target={externo ? "_blank" : undefined}
             rel={externo ? "noopener noreferrer" : undefined}
-            className="btn btn-outline flex items-center gap-3 whitespace-nowrap !text-base !px-8 !py-4"
+            className="btn btn-outline flex w-full justify-center items-center gap-3 whitespace-nowrap !text-base !px-8 !py-4 sm:w-auto"
           >
             {externo && <FaWhatsapp className="text-lg" />}
             {textoBotao}

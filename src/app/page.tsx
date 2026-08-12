@@ -11,9 +11,9 @@ import FAQ from "@/components/landing/faq";
 import ContatoInfo from "@/components/landing/contatoInfo";
 import ContatoForm from "@/components/landing/contatoForm";
 import Mapa from "@/components/landing/mapa";
-import WhatsAppButton from "@/components/landing/whatsappButton";
 import CookieNotice from "@/components/landing/cookieNotice";
 import Hub from "@/components/landing/hub";
+import ChatWidget from "@/components/chatWidget";
 
 export default function Home() {
   return (
@@ -86,8 +86,8 @@ export default function Home() {
       </main>
 
       <Footer />
-      <WhatsAppButton />
       <CookieNotice />
+      <ChatWidget />
     </>
   );
 }

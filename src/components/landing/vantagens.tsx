@@ -1,6 +1,6 @@
 "use client";
 
-import { useId } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
@@ -22,7 +22,7 @@ const CARDS = [
     titulo: "Suporte Personalizado",
     descricao: "Comunicação direta para dúvidas e orientações estratégicas eficazes.",
     imagem:
-      "https://barralcontabilidade.com.br/wp-content/uploads/2025/08/Home-Barral-Contabilidade-em-Recife-PE-Img-2-2.webp",
+      "/ingrid.jpg",
     objectPosition: "50% 28%",
     zoom: 1,
   },
@@ -124,16 +124,46 @@ export default function CardsDiferenciais() {
     triggerOnce: true,
     threshold: 0.15,
   });
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const [indiceAtivo, setIndiceAtivo] = useState(0);
+
+  const moverParaIndice = (proximoIndice: number) => {
+    const container = carouselRef.current;
+    const cards = container?.querySelectorAll("[data-card-slide]");
+    const card = cards?.[proximoIndice] as HTMLElement | undefined;
+
+    if (!container || !card) return;
+
+    const left = card.offsetLeft - 12;
+    container.scrollTo({ left, behavior: "smooth" });
+    setIndiceAtivo(proximoIndice);
+  };
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setIndiceAtivo((atual) => {
+        const proximo = (atual + 1) % CARDS.length;
+        moverParaIndice(proximo);
+        return proximo;
+      });
+    }, 4200);
+
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <section ref={ref} className="py-16 bg-[#f3f4f6]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1) CARDS DE IMAGEM */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center mb-16">
+        <div
+          ref={carouselRef}
+          className="max-w-6xl mx-auto flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 mb-16 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6"
+        >
           {CARDS.map((card, i) => (
             <article
               key={i}
-              className="w-full max-w-[360px] rounded-2xl overflow-hidden shadow-lg bg-[#070b10] flex flex-col"
+              data-card-slide
+              className="w-full min-w-[86vw] max-w-[360px] snap-center rounded-2xl overflow-hidden shadow-lg bg-[#070b10] flex flex-col md:min-w-0"
               style={{
                 height: ALTURA_CARD,
                 opacity: inView ? 1 : 0,
@@ -178,6 +208,20 @@ export default function CardsDiferenciais() {
                 </p>
               </div>
             </article>
+          ))}
+        </div>
+
+        <div className="mb-16 flex justify-center gap-2 md:hidden">
+          {CARDS.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              aria-label={`Ir para diferencial ${index + 1}`}
+              onClick={() => moverParaIndice(index)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                indiceAtivo === index ? "w-8 bg-primary" : "w-2.5 bg-primary/30"
+              }`}
+            />
           ))}
         </div>
 

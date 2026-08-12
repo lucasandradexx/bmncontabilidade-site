@@ -106,6 +106,21 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  .animate-fade-in {
+    animation: fadeIn 0.35s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 /* ─────────────────────────────────────────
@@ -152,6 +167,19 @@
     background-color: white;
     color: var(--color-primary);
     border-color: white;
+    transform: scale(0.97);
+  }
+
+  /* Outlined button using the primary/secondary theme color */
+  .btn-outline-primary {
+    background-color: transparent;
+    color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
+    transition: all 0.25s ease;
+  }
+  .btn-outline-primary:hover {
+    background-color: var(--color-secondary);
+    color: white;
     transform: scale(0.97);
   }
 
@@ -294,5 +322,37 @@
     gap: 20px;
     z-index: 99999;
     flex-wrap: wrap;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --container: 1280px;
+}
+
+html, body {
+  overflow-x: hidden; /* evita scroll lateral acidental */
+}
+
+@layer components {
+  .container-site {
+    @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: var(--container);
+  }
+
+  .section-y {
+    @apply py-10 sm:py-12 lg:py-16;
+  }
+
+  .title-fluid {
+    font-size: clamp(1.5rem, 2.2vw, 2.5rem);
+    line-height: 1.15;
+  }
+
+  .subtitle-fluid {
+    font-size: clamp(0.95rem, 1.2vw, 1.125rem);
   }
 }

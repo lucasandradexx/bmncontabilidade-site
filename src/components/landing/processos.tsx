@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const ETAPAS = [
@@ -32,6 +33,32 @@ const ETAPAS = [
 
 export default function Processos() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const [indiceAtivo, setIndiceAtivo] = useState(0);
+
+  const moverParaIndice = (proximoIndice: number) => {
+    const container = carouselRef.current;
+    const cards = container?.querySelectorAll("[data-card-slide]");
+    const card = cards?.[proximoIndice] as HTMLElement | undefined;
+
+    if (!container || !card) return;
+
+    const left = card.offsetLeft - 12;
+    container.scrollTo({ left, behavior: "smooth" });
+    setIndiceAtivo(proximoIndice);
+  };
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setIndiceAtivo((atual) => {
+        const proximo = (atual + 1) % ETAPAS.length;
+        moverParaIndice(proximo);
+        return proximo;
+      });
+    }, 4200);
+
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <section
@@ -58,12 +85,20 @@ export default function Processos() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          ref={carouselRef}
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0"
+        >
           {ETAPAS.map((e, i) => (
             <div
               key={i}
-              className={`card border-t-4 border-secondary transition-all duration-700
-                          ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+              data-card-slide
+              className={`group card-glass text-center min-w-[84vw] sm:min-w-[300px] snap-center
+                          transition-all duration-700 lg:min-w-0
+                          ${inView
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-10"
+                          }`}
               style={{ transitionDelay: `${150}ms` }}
             >
               {/* Número */}
@@ -78,6 +113,20 @@ export default function Processos() {
               <h3 className="text-base font-bold text-primary mb-3">{e.titulo}</h3>
               <p className="text-sm text-gray-500 leading-relaxed">{e.descricao}</p>
             </div>
+          ))}
+        </div>
+
+        <div className="mt-5 flex justify-center gap-2 lg:hidden">
+          {ETAPAS.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              aria-label={`Ir para etapa ${index + 1}`}
+              onClick={() => moverParaIndice(index)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                indiceAtivo === index ? "w-8 bg-primary" : "w-2.5 bg-primary/30"
+              }`}
+            />
           ))}
         </div>
 

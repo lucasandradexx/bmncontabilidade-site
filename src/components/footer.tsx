@@ -1,5 +1,9 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import LegalModal from "@/components/legalModal"// <-- Importe de acordo com o caminho da sua pasta
 import {
   FaWhatsapp,
   FaEnvelope,
@@ -12,13 +16,13 @@ const WA_LINK =
   "https://wa.me/558194725310?text=Ol%C3%A1!%20Encontrei%20seu%20site%20atrav%C3%A9s%20do%20Google%20e%20estou%20interessado(a)%20em%20saber%20mais%20sobre%20seus%20servi%C3%A7os.%20Poderia%20me%20fornecer%20mais%20informa%C3%A7%C3%B5es,%20por%20favor?";
 
 const NAV_LINKS = [
-  { label: "Início",                        href: "#inicio"         },
-  { label: "Segmentos",                     href: "#especialidades" },
-  { label: "Sobre Nós",                     href: "#sobre"          },
-  { label: "Serviços",                      href: "#servicos"       },
-  { label: "Propósito e modelo atendimento",href: "#proposito"      },
-  { label: "Blog",                          href: "/blog"           },
-  { label: "Entre em contato",              href: "#contato"        },
+  { label: "Início", href: "#inicio" },
+  { label: "Segmentos", href: "#especialidades" },
+  { label: "Sobre Nós", href: "#sobre" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Propósito e modelo atendimento", href: "#proposito" },
+  { label: "Blog", href: "/blog" },
+  { label: "Entre em contato", href: "#contato" },
 ];
 
 const SERVICOS_LINKS = [
@@ -32,10 +36,11 @@ const SERVICOS_LINKS = [
 
 export default function Footer() {
   const anoAtual = new Date().getFullYear();
+  // Estado para controlar qual modal abrir
+  const [modalType, setModalType] = useState<"terms" | "privacy" | null>(null);
 
   return (
-    <footer className="gradient-dark text-white/75">
-
+    <footer className="gradient-dark text-white/75 bg-slate-900">
       {/* ── Corpo principal ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12">
@@ -72,7 +77,8 @@ export default function Footer() {
                            hover:text-secondary transition-colors"
               >
                 <FaWhatsapp className="text-secondary text-base flex-shrink-0" />
-                (81) 99472-5310              </Link>
+                (81) 99472-5310
+              </Link>
 
               <Link
                 href="mailto:contato@bmncontabilidade.com"
@@ -186,24 +192,31 @@ export default function Footer() {
               {anoAtual} © Contabilidade em Recife - PE | BMN Contabilidade
             </p>
 
-            {/* Links legais */}
+            {/* Botões do Modal */}
             <div className="flex items-center gap-6 flex-wrap justify-center">
-              <Link
-                href="/politica-de-privacidade"
-                className="hover:text-secondary transition-colors"
+              <button
+                onClick={() => setModalType("privacy")}
+                className="hover:text-secondary transition-colors cursor-pointer"
               >
                 Política de Privacidade
-              </Link>
-              <Link
-                href="/termos-de-uso"
-                className="hover:text-secondary transition-colors"
+              </button>
+              <button
+                onClick={() => setModalType("terms")}
+                className="hover:text-secondary transition-colors cursor-pointer"
               >
                 Termos de Uso
-              </Link>
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* ── Renderização do Modal Externo ── */}
+      <LegalModal
+        isOpen={!!modalType}
+        type={modalType}
+        onClose={() => setModalType(null)}
+      />
     </footer>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { FaCheck } from "react-icons/fa";
 
@@ -40,6 +41,32 @@ const SERVICOS = [
 export default function Servicos() {
   /* threshold baixo para disparar a animação mais cedo */
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.05 });
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const [indiceAtivo, setIndiceAtivo] = useState(0);
+
+  const moverParaIndice = (proximoIndice: number) => {
+    const container = carouselRef.current;
+    const cards = container?.querySelectorAll("[data-card-slide]");
+    const card = cards?.[proximoIndice] as HTMLElement | undefined;
+
+    if (!container || !card) return;
+
+    const left = card.offsetLeft - 12;
+    container.scrollTo({ left, behavior: "smooth" });
+    setIndiceAtivo(proximoIndice);
+  };
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setIndiceAtivo((atual) => {
+        const proximo = (atual + 1) % SERVICOS.length;
+        moverParaIndice(proximo);
+        return proximo;
+      });
+    }, 4200);
+
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <section
@@ -73,14 +100,18 @@ export default function Servicos() {
         </div>
 
         {/* ── Grid de cards — altura uniforme ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div
+          ref={carouselRef}
+          className="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-3"
+        >
           {SERVICOS.map((s, i) => (
             <Link
               key={i}
+              data-card-slide
               href="#contato"
-              className="group flex gap-5 items-start rounded-2xl p-7
+              className="group flex gap-5 items-start rounded-2xl p-7 min-w-[84vw] snap-center
                          border border-white/10 hover:border-secondary/60
-                         hover:bg-white/8 transition-colors duration-300"
+                         hover:bg-white/8 transition-colors duration-300 md:min-w-0"
               style={{
                 backgroundColor: "rgba(255,255,255,0.04)",
                 /* ✅ Animação de subida uniforme para todos */
@@ -114,6 +145,20 @@ export default function Servicos() {
                 </p>
               </div>
             </Link>
+          ))}
+        </div>
+
+        <div className="mt-5 flex justify-center gap-2 md:hidden">
+          {SERVICOS.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              aria-label={`Ir para serviço ${index + 1}`}
+              onClick={() => moverParaIndice(index)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                indiceAtivo === index ? "w-8 bg-white" : "w-2.5 bg-white/40"
+              }`}
+            />
           ))}
         </div>
       </div>

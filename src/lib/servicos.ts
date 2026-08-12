@@ -1,4 +1,4 @@
-// lib/servicos.ts
+// src/lib/servicos.ts
 
 export type IconeServico =
   | "consultoria"
@@ -17,6 +17,16 @@ export type IconeServico =
 export type EtapaServico = {
   titulo: string;
   descricao: string;
+};
+
+export type PlanoServico = {
+  nome: "Basic" | "Platinum" | "Diamond" | string;
+  descricao: string;
+  preco?: string;
+  recursos: string[];
+  destaque?: boolean;
+  ctaTexto?: string;
+  ctaHref?: string;
 };
 
 export type FAQItem = {
@@ -43,7 +53,7 @@ export type Servico = {
   resumo: string;
   descricao: string;
   icone: IconeServico;
-  imagem: string; // caminho em /public
+  imagem: string;
   destaque?: string;
   seo: Seo;
   beneficios: string[];
@@ -53,15 +63,20 @@ export type Servico = {
   faq: FAQItem[];
   cta: CTA;
   relacionados: string[];
+  mostrarFormulario?: boolean;
+  planos?: PlanoServico[];
 };
+
+const WA_MESSAGE = encodeURIComponent(
+  "Olá! Quero saber mais sobre os serviços da BMN."
+);
 
 const CTA_PADRAO: CTA = {
   titulo: "Vamos estruturar esse serviço no seu negócio?",
   descricao:
     "Fale com nossa equipe e receba um plano de atendimento conforme a sua realidade.",
   botaoTexto: "Falar com especialista",
-  botaoHref:
-    "https://wa.me/558194725310?text=Olá!%20Quero%20saber%20mais%20sobre%20os%20serviços%20da%20BMN.",
+  botaoHref: `https://wa.me/558194725310?text=${WA_MESSAGE}`,
   externo: true,
 };
 
@@ -139,7 +154,11 @@ export const SERVICOS: Servico[] = [
       "Mapa de oportunidades tributárias",
       "Plano de enquadramento e revisão",
     ],
-    paraQuem: ["Empresas de comércio, serviços e indústria", "Empresas em expansão", "Negócios com alta carga tributária"],
+    paraQuem: [
+      "Empresas de comércio, serviços e indústria",
+      "Empresas em expansão",
+      "Negócios com alta carga tributária",
+    ],
     etapas: [
       { titulo: "Levantamento", descricao: "Coleta de dados fiscais e operacionais." },
       { titulo: "Simulação", descricao: "Comparação técnica de cenários tributários." },
@@ -175,8 +194,16 @@ export const SERVICOS: Servico[] = [
         "Gestão completa de declarações e obrigações acessórias com conformidade e controle de prazos.",
     },
     beneficios: ["Conformidade fiscal", "Menos risco de autuações", "Controle de prazos e protocolos"],
-    entregaveis: ["Envio das declarações obrigatórias", "Conferência de consistência", "Relatório de competências entregues"],
-    paraQuem: ["Empresas obrigadas a declarações fiscais e contábeis", "Negócios que tiveram notificações", "Empresas sem rotina interna de controle"],
+    entregaveis: [
+      "Envio das declarações obrigatórias",
+      "Conferência de consistência",
+      "Relatório de competências entregues",
+    ],
+    paraQuem: [
+      "Empresas obrigadas a declarações fiscais e contábeis",
+      "Negócios que tiveram notificações",
+      "Empresas sem rotina interna de controle",
+    ],
     etapas: [
       { titulo: "Mapeamento", descricao: "Identificação de todas as obrigações por regime e atividade." },
       { titulo: "Execução", descricao: "Processamento e envio de cada obrigação dentro do prazo." },
@@ -209,9 +236,17 @@ export const SERVICOS: Servico[] = [
       description:
         "Terceirização fiscal com processos, compliance, apuração e controle para sua empresa operar com segurança.",
     },
-    beneficios: ["Padronização de processos fiscais", "Menor custo operacional interno", "Acompanhamento técnico especializado"],
+    beneficios: [
+      "Padronização de processos fiscais",
+      "Menor custo operacional interno",
+      "Acompanhamento técnico especializado",
+    ],
     entregaveis: ["Apuração de tributos", "Escrituração fiscal", "Conciliação e relatórios fiscais"],
-    paraQuem: ["Empresas com volume fiscal alto", "Negócios sem time fiscal interno", "Empresas que buscam escala com controle"],
+    paraQuem: [
+      "Empresas com volume fiscal alto",
+      "Negócios sem time fiscal interno",
+      "Empresas que buscam escala com controle",
+    ],
     etapas: [
       { titulo: "Transição", descricao: "Integração de documentos, sistemas e regras fiscais." },
       { titulo: "Operação", descricao: "Execução recorrente de apurações e obrigações." },
@@ -245,8 +280,16 @@ export const SERVICOS: Servico[] = [
         "Terceirização financeira com controle de caixa, conciliações, contas e relatórios gerenciais.",
     },
     beneficios: ["Organização do financeiro", "Maior previsibilidade de caixa", "Apoio para tomada de decisão"],
-    entregaveis: ["Rotina de contas a pagar e receber", "Conciliação bancária", "Relatório de fluxo de caixa"],
-    paraQuem: ["Empresas com desorganização financeira", "Negócios em expansão", "Empreendedores sem equipe financeira estruturada"],
+    entregaveis: [
+      "Rotina de contas a pagar e receber",
+      "Conciliação bancária",
+      "Relatório de fluxo de caixa",
+    ],
+    paraQuem: [
+      "Empresas com desorganização financeira",
+      "Negócios em expansão",
+      "Empreendedores sem equipe financeira estruturada",
+    ],
     etapas: [
       { titulo: "Diagnóstico", descricao: "Mapeamento da rotina e gargalos financeiros." },
       { titulo: "Implementação", descricao: "Estruturação de processos e calendário financeiro." },
@@ -264,6 +307,55 @@ export const SERVICOS: Servico[] = [
     ],
     cta: CTA_PADRAO,
     relacionados: ["gestao-financeira", "contabilidade-consultiva", "folha-de-pagamento"],
+    planos: [
+      {
+        nome: "Plano BNM Essencial",
+        descricao: "Para microempresas e profissionais liberais que precisam organizar a casa.",
+        preco: "A partir de R$ 300,00 / mês",
+        recursos: [
+          "1 conta bancária parceira (Banco Cora)",
+          "Até 50 transações financeiras mensais",
+          "Emissão de até 16 Notas Fiscais/mês",
+          "Conciliação bancária mensal",
+          "Organização digital de documentos",
+          "Relatório mensal do Fluxo de Caixa",
+        ],
+        ctaTexto: "Quero o Plano Essencial",
+        ctaHref: `https://wa.me/558194725310?text=${encodeURIComponent("Olá! Tenho interesse no plano BNM Essencial de BPO Financeiro.")}`,
+      },
+      {
+        nome: "Plano BNM Performance",
+        descricao: "Para pequenas empresas em crescimento que precisam de agilidade e dados gerenciais.",
+        preco: "A partir de R$ 497,00 / mês",
+        destaque: true,
+        recursos: [
+          "Gestão de até 2 contas bancárias",
+          "Até 200 transações financeiras mensais",
+          "Emissão de Notas Fiscais e Boletos (até 30/mês)",
+          "Conciliação bancária diária",
+          "Agendamento de pagamentos no banco",
+          "Apresentação mensal do Fluxo de Caixa e DRE",
+        ],
+        ctaTexto: "Quero o Plano Performance",
+        ctaHref: `https://wa.me/558194725310?text=${encodeURIComponent("Olá! Tenho interesse no plano BNM Performance de BPO Financeiro.")}`,
+      },
+      {
+        nome: "Plano BNM Estratégico",
+        descricao: "Para médias empresas e startups que exigem gestão robusta e inteligência de dados.",
+        preco: "A partir de R$ 850,00 / mês",
+        recursos: [
+          "Múltiplas contas e integração com seu ERP",
+          "Volume de transações e notas sob medida",
+          "Gestão ativa de inadimplência (cobrança)",
+          "Dashboards financeiros em tempo real (BI)",
+          "Projeção de Fluxo de Caixa (3 a 6 meses)",
+          "Reunião mensal de consultoria estratégica",
+        ],
+        ctaTexto: "Quero o Plano Estratégico",
+        ctaHref: `https://wa.me/558194725310?text=${encodeURIComponent("Olá! Tenho interesse no plano BNM Estratégico de BPO Financeiro.")}`,
+      },
+    ],
+
   },
 
   {
@@ -316,7 +408,11 @@ export const SERVICOS: Servico[] = [
     },
     beneficios: ["Conformidade trabalhista", "Redução de erros em cálculos", "Cumprimento de prazos legais"],
     entregaveis: ["Folha mensal processada", "Guias e encargos", "Rotinas de admissão/demissão/férias"],
-    paraQuem: ["Empresas com colaboradores CLT", "Empresas sem departamento pessoal interno", "Negócios em crescimento de equipe"],
+    paraQuem: [
+      "Empresas com colaboradores CLT",
+      "Empresas sem departamento pessoal interno",
+      "Negócios em crescimento de equipe",
+    ],
     etapas: [
       { titulo: "Cadastro", descricao: "Organização de dados de colaboradores e regras internas." },
       { titulo: "Processamento", descricao: "Cálculo mensal de folha e eventos trabalhistas." },
@@ -351,7 +447,11 @@ export const SERVICOS: Servico[] = [
     },
     beneficios: ["Regularidade no eSocial", "Cálculos corretos", "Tranquilidade para o empregador"],
     entregaveis: ["Cadastro e parametrização", "Folha doméstica", "Geração de DAE e orientações"],
-    paraQuem: ["Empregadores domésticos", "Famílias que desejam regularizar vínculo", "Quem já possui vínculo e quer apoio contínuo"],
+    paraQuem: [
+      "Empregadores domésticos",
+      "Famílias que desejam regularizar vínculo",
+      "Quem já possui vínculo e quer apoio contínuo",
+    ],
     etapas: [
       { titulo: "Configuração", descricao: "Cadastro de empregador e empregado no sistema." },
       { titulo: "Rotina", descricao: "Fechamento mensal com cálculo e guias." },
@@ -489,9 +589,21 @@ export const SERVICOS: Servico[] = [
       description:
         "Emissão e renovação de certificado digital com orientação técnica para uso em operações fiscais e contábeis.",
     },
-    beneficios: ["Segurança nas assinaturas digitais", "Agilidade em processos eletrônicos", "Conformidade com exigências legais"],
-    entregaveis: ["Orientação de tipo de certificado", "Suporte na emissão/renovação", "Apoio para instalação e uso"],
-    paraQuem: ["Empresas e sócios", "Profissionais liberais", "Pessoas físicas com demandas de assinatura digital"],
+    beneficios: [
+      "Segurança nas assinaturas digitais",
+      "Agilidade em processos eletrônicos",
+      "Conformidade com exigências legais",
+    ],
+    entregaveis: [
+      "Orientação de tipo de certificado",
+      "Suporte na emissão/renovação",
+      "Apoio para instalação e uso",
+    ],
+    paraQuem: [
+      "Empresas e sócios",
+      "Profissionais liberais",
+      "Pessoas físicas com demandas de assinatura digital",
+    ],
     etapas: [
       { titulo: "Escolha", descricao: "Definição do certificado ideal para o seu uso." },
       { titulo: "Emissão", descricao: "Conferência de documentos e processo de validação." },
@@ -510,10 +622,106 @@ export const SERVICOS: Servico[] = [
     cta: CTA_PADRAO,
     relacionados: ["obrigacoes-acessorias", "folha-de-pagamento", "bpo-fiscal"],
   },
+  {
+    slug: "emissao-de-notas",
+    titulo: "Emissão de Notas",
+    resumo: "Emissão correta de NF-e e NFS-e com segurança fiscal e conformidade.",
+    descricao:
+      "Executamos e monitoramos a emissão de notas fiscais eletrônicas (NF-e e NFS-e), com validação de dados, regras tributárias e acompanhamento de rejeições para reduzir riscos fiscais e operacionais.",
+    icone: "fiscal",
+    imagem: "/servicos/emissao-de-notas.jpg",
+    destaque: "Notas emitidas com precisão e menos risco de autuação.",
+    seo: {
+      title: "Emissão de Notas | BMN Contabilidade",
+      description:
+        "Serviço de emissão de notas fiscais (NF-e e NFS-e) com validação tributária, controle de rejeições e conformidade fiscal.",
+    },
+    beneficios: [
+      "Redução de erros na emissão",
+      "Menos rejeições e retrabalho",
+      "Conformidade fiscal nas operações",
+      "Maior controle documental",
+    ],
+    entregaveis: [
+      "Emissão de NF-e e NFS-e conforme rotina definida",
+      "Validação cadastral e tributária antes do envio",
+      "Acompanhamento de rejeições e correções",
+      "Relatório periódico de emissões e pendências",
+    ],
+    paraQuem: [
+      "Empresas com alto volume de faturamento",
+      "Negócios com erros recorrentes em notas fiscais",
+      "Empresas sem rotina fiscal estruturada",
+    ],
+    etapas: [
+      {
+        titulo: "Diagnóstico",
+        descricao:
+          "Mapeamento de operação, tipo de nota, regras de tributação e fluxo de faturamento.",
+      },
+      {
+        titulo: "Parametrização",
+        descricao:
+          "Ajuste de cadastro de clientes/serviços/produtos e regras fiscais de emissão.",
+      },
+      {
+        titulo: "Operação e controle",
+        descricao:
+          "Emissão recorrente, tratamento de rejeições e monitoramento de conformidade.",
+      },
+    ],
+    faq: [
+      {
+        pergunta: "Vocês emitem NF-e e NFS-e?",
+        resposta:
+          "Sim. Atendemos emissão conforme o tipo de operação e regras fiscais aplicáveis.",
+      },
+      {
+        pergunta: "E quando a nota é rejeitada?",
+        resposta:
+          "Fazemos a análise da rejeição, corrigimos a inconsistência e realizamos nova transmissão.",
+      },
+      {
+        pergunta: "Esse serviço substitui o BPO Fiscal?",
+        resposta:
+          "Não necessariamente. A emissão de notas pode ser contratada isoladamente ou integrada ao BPO Fiscal.",
+      },
+    ],
+    cta: CTA_PADRAO,
+    relacionados: ["bpo-fiscal", "obrigacoes-acessorias", "planejamento-tributario"],
+  },
 ];
 
+
+// Slugs que mostram formulário
+export const SLUGS_COM_FORM = new Set<string>([
+  "contabilidade-consultiva",
+  "planejamento-tributario",
+  "bpo-financeiro",
+  "bpo-fiscal", // BPO Fiscal - Emissão de Notas
+  "gestao-financeira",
+  "folha-de-pagamento",
+  "e-social-domestico",
+  "abertura-de-empresas",
+  "regularizacao", // Regularização de Empresas
+  "imposto-de-renda",
+  "emissao-de-notas",
+]);
+
+// Função centralizada para decidir se exibe form
+export function deveMostrarFormulario(servico: Servico): boolean {
+  // Se o item tiver mostrarFormulario definido manualmente, ele manda.
+  if (typeof servico.mostrarFormulario === "boolean") {
+    return servico.mostrarFormulario;
+  }
+
+  // Senão, usa a regra por slug
+  return SLUGS_COM_FORM.has(servico.slug);
+}
+
 export function getServicoBySlug(slug: string): Servico | undefined {
-  return SERVICOS.find((s) => s.slug === slug);
+  const normalized = slug.trim().toLowerCase();
+  return SERVICOS.find((s) => s.slug === normalized);
 }
 
 export function getServicosRelacionados(slugs: string[]): Servico[] {

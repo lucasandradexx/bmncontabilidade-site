@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaBars, FaTimes, FaWhatsapp, FaChevronDown } from "react-icons/fa";
+import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 
 const WA_LINK =
   "https://wa.me/558194725310?text=Ol%C3%A1!%20Encontrei%20seu%20site%20atrav%C3%A9s%20do%20Google%20e%20estou%20interessado(a)%20em%20saber%20mais%20sobre%20seus%20servi%C3%A7os.%20Poderia%20me%20fornecer%20mais%20informa%C3%A7%C3%B5es,%20por%20favor?";
 
+const ZEN_LINK = "https://mnconsultoria.app.questorpublico.com.br/Authorize/LogOn?ReturnUrl=%2fempresa%2finicio";
 const navLinks = [
   { label: "Início", href: "/#inicio" },
   { label: "Segmentos", href: "/#especialidades" },
@@ -16,20 +17,25 @@ const navLinks = [
   { label: "Entre em contato", href: "/#contato" },
 ];
 
+// Ordem solicitada (1..13)
 const servicosLinks = [
-  { label: "Contabilidade consultiva", href: "/servicos/contabilidade-consultiva" },
-  { label: "Planejamento tributário", href: "/servicos/planejamento-tributario" },
-  { label: "Obrigações acessórias", href: "/servicos/obrigacoes-acessorias" },
-  { label: "BPO Fiscal", href: "/servicos/bpo-fiscal" },
-  { label: "BPO Financeiro", href: "/servicos/bpo-financeiro" },
-  { label: "Gestão financeira", href: "/servicos/gestao-financeira" },
-  { label: "Folha de pagamento", href: "/servicos/folha-de-pagamento" },
-  { label: "E-social doméstico", href: "/servicos/e-social-domestico" },
-  { label: "Abertura de empresas", href: "/servicos/abertura-de-empresas" },
-  { label: "Regularização", href: "/servicos/regularizacao" },
-  { label: "Imposto de renda", href: "/servicos/imposto-de-renda" },
-  { label: "Certificado Digital", href: "/servicos/certificado-digital" },
+  { label: "Contabilidade Consultiva", href: "/servicos/contabilidade-consultiva" }, // 1
+  { label: "Planejamento Tributário", href: "/servicos/planejamento-tributario" }, // 2
+  { label: "BPO Fiscal", href: "/servicos/bpo-fiscal" }, // 3
+  { label: "BPO Financeiro", href: "/bpo-financeiro" }, // 4
+  { label: "Gestão Financeira", href: "/servicos/gestao-financeira" }, // 5
+  { label: "Obrigações Acessórias", href: "/servicos/obrigacoes-acessorias" }, // 6
+  { label: "Abertura de Empresas", href: "/servicos/abertura-de-empresas" }, // 7
+  { label: "Regularização de Empresas", href: "/servicos/regularizacao" }, // 8
+  { label: "Folha de Pagamento", href: "/servicos/folha-de-pagamento" }, // 9
+  { label: "eSocial Doméstico", href: "/servicos/e-social-domestico" }, // 10
+  { label: "Imposto de Renda", href: "/servicos/imposto-de-renda" }, // 11
+  { label: "Certificado Digital", href: "/servicos/certificado-digital" }, // 12
+  { label: "Emissão de Notas", href: "/servicos/emissao-de-notas" }, // 13 (garanta que essa rota exista)
 ];
+
+const servicosColuna1 = servicosLinks.slice(0, 7); // 1..7
+const servicosColuna2 = servicosLinks.slice(7, 13); // 8..13
 
 export default function Header() {
   const [menuAberto, setMenuAberto] = useState(false);
@@ -116,23 +122,37 @@ export default function Header() {
                     transition-all duration-200
                   "
                 >
-                  <div className="w-[620px] max-h-[420px] overflow-y-auto rounded-xl border border-gray-100 bg-white shadow-xl p-3">
-                    <div className="grid grid-cols-2 gap-2">
-                      {servicosLinks.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-secondary transition-colors"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
+                  <div className="w-[660px] max-h-[460px] overflow-y-auto rounded-xl border border-gray-100 bg-white shadow-xl p-3">
+                    {/* Coluna 1: 1..7 | Coluna 2: 8..13 */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        {servicosColuna1.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-secondary transition-colors"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+
+                      <div className="space-y-1">
+                        {servicosColuna2.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-secondary transition-colors"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
               </li>
 
-              {/* Restante */}
               {navLinks.slice(3).map((link) => (
                 <li key={link.href}>
                   <Link
@@ -146,26 +166,24 @@ export default function Header() {
             </ul>
 
             <Link
-              href={WA_LINK}
+              href={ZEN_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary flex items-center gap-2 !px-5 !py-3 !text-sm"
             >
-              <FaWhatsapp className="text-lg" />
-              Fale com um especialista
+              Area do Cliente
             </Link>
           </nav>
 
           {/* MOBILE */}
           <div className="flex items-center gap-3 lg:hidden">
             <Link
-              href={WA_LINK}
+              href={ZEN_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="WhatsApp"
-              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-white hover:bg-primary transition-colors"
+              className="btn btn-primary !px-4 !py-2 !text-sm"
             >
-              <FaWhatsapp className="text-xl" />
+              Area do Cliente
             </Link>
 
             <button
@@ -228,7 +246,7 @@ export default function Header() {
 
             <div
               className={`overflow-hidden transition-all duration-300 ${
-                servicosMobileAberto ? "max-h-[520px] pb-2" : "max-h-0"
+                servicosMobileAberto ? "max-h-[720px] pb-2" : "max-h-0"
               }`}
             >
               <Link
@@ -270,14 +288,13 @@ export default function Header() {
           ))}
 
           <Link
-            href={WA_LINK}
+            href={ZEN_LINK}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMenuAberto(false)}
             className="btn btn-primary justify-center mt-4"
           >
-            <FaWhatsapp />
-            Fale com um especialista
+            Area do Cliente
           </Link>
         </nav>
       </div>

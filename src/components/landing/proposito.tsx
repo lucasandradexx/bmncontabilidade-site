@@ -36,7 +36,7 @@ export default function Proposito() {
           >
             <span className="tag-section">Nossos ideais</span>
 
-            <h2 className="section-title mt-1">
+            <h2 className="section-title mt-1 text-balance leading-tight">
               Missão, visão e valores: nossa jornada para o seu sucesso!
             </h2>
 
@@ -75,7 +75,7 @@ export default function Proposito() {
               ))}
             </div>
 
-            <Link href="#contato" className="btn btn-primary">
+            <Link href="#contato" className="btn btn-primary w-full sm:w-auto justify-center">
               Faça parte dessa história
             </Link>
           </div>
