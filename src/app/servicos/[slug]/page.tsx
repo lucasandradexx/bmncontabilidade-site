@@ -81,14 +81,16 @@ export default async function ServicoPage({ params }: PageProps) {
         {/* CONTEÚDO */}
         <section className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 lg:grid-cols-3 lg:px-8">
           <article className={`space-y-6 ${exibirFormulario ? "lg:col-span-2" : "lg:col-span-3"}`}>
-            <div className="rounded-2xl border border-cyan-100/20 bg-[#0b3f5e]/55 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+            <div className="rounded-2xl border border-cyan-100/20 bg-gradient-to-br from-[#0b3f5e] to-secondary/60 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
               <h2 className="text-xl font-bold text-white">Visão geral</h2>
-              <p className="mt-3 leading-relaxed text-slate-100/90">
-                {servico.descricao}
-              </p>
+              <div className="mt-3 space-y-3 leading-relaxed text-slate-100/90">
+                {servico.descricao.split("\n\n").map((paragrafo, index) => (
+                  <p key={index}>{paragrafo}</p>
+                ))}
+              </div>
             </div>
 
-            <div className="rounded-2xl border border-cyan-100/20 bg-[#0b3f5e]/55 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+            <div className="rounded-2xl border border-cyan-100/20 bg-gradient-to-br from-[#0b3f5e] to-secondary/60 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
               <h2 className="text-xl font-bold text-white">Benefícios</h2>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                 {servico.beneficios.map((item) => (
@@ -102,7 +104,7 @@ export default async function ServicoPage({ params }: PageProps) {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-cyan-100/20 bg-[#0b3f5e]/55 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+            <div className="rounded-2xl border border-cyan-100/20 bg-gradient-to-br from-[#0b3f5e] to-secondary/60 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
               <h2 className="text-xl font-bold text-white">Etapas do atendimento</h2>
               <div className="mt-4 grid gap-4 md:grid-cols-3">
                 {servico.etapas.map((etapa) => (
@@ -120,7 +122,7 @@ export default async function ServicoPage({ params }: PageProps) {
             </div>
 
             {servico.planos?.length ? (
-              <div className="rounded-2xl border border-cyan-100/20 bg-[#0b3f5e]/55 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+              <div className="rounded-2xl border border-cyan-100/20 bg-gradient-to-br from-[#0b3f5e] to-secondary/60 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
                 <h2 className="text-xl font-bold text-white">Planos do BPO Financeiro</h2>
                 <p className="mt-2 text-sm text-slate-100/85">
                   Escolha o plano ideal para o momento da sua empresa.
@@ -169,7 +171,7 @@ export default async function ServicoPage({ params }: PageProps) {
               </div>
             ) : null}
 
-            <div className="rounded-2xl border border-cyan-100/20 bg-[#0b3f5e]/55 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+            <div className="rounded-2xl border border-cyan-100/20 bg-gradient-to-br from-[#0b3f5e] to-secondary/60 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
               <h2 className="text-xl font-bold text-white">
                 Dúvidas frequentes deste serviço
               </h2>
@@ -189,7 +191,7 @@ export default async function ServicoPage({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-cyan-100/20 bg-[#0b3f5e]/55 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+            <div className="rounded-2xl border border-cyan-100/20 bg-gradient-to-br from-[#0b3f5e] to-secondary/60 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
               <h3 className="font-bold text-white">Indicado para</h3>
               <ul className="mt-3 space-y-2">
                 {servico.paraQuem.map((item) => (
@@ -200,7 +202,7 @@ export default async function ServicoPage({ params }: PageProps) {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-cyan-100/20 bg-[#0b3f5e]/55 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+            <div className="rounded-2xl border border-cyan-100/20 bg-gradient-to-br from-[#0b3f5e] to-secondary/60 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
               <h3 className="font-bold text-white">Serviços relacionados</h3>
               <div className="mt-3 space-y-2">
                 {relacionados.map((rel) => (

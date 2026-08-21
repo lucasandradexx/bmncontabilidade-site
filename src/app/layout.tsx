@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://SEU-DOMINIO.com"), // troque no deploy
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "BMN Contabilidade",
     template: "%s | BMN Contabilidade",

@@ -91,7 +91,7 @@ export default function Footer() {
 
               <div className="flex items-center gap-3 text-sm text-white/70">
                 <FaClock className="text-secondary text-base flex-shrink-0" />
-                Seg – Sex: 9h às 18h
+                Seg – Sex: 9h às 17h
               </div>
 
               <div className="flex items-start gap-3 text-sm text-white/70">

@@ -88,7 +88,7 @@ const ITENS: HubItem[] = [
   },
   {
     id: "e-social-domestico",
-    label: "E-Social Doméstico",
+    label: "e-Social",
     href: "/servicos/e-social-domestico",
     x: 153,
     y: 500,
@@ -104,7 +104,7 @@ const ITENS: HubItem[] = [
   },
   {
     id: "regularizacao",
-    label: "Regularização",
+    label: "Regularização de Empresas",
     href: "/servicos/regularizacao",
     x: 0,
     y: 293,
@@ -190,7 +190,7 @@ function HubItemCard({ item }: { item: HubItem }) {
           transition-opacity duration-150
         "
       />
-      <span className="relative z-10 block w-full text-center">{item.label}</span>
+      <span className="relative z-10 block w-full text-center uppercase">{item.label}</span>
     </Link>
   );
 }
@@ -212,7 +212,7 @@ function HubItemCardMobile({ item, index }: { item: HubItem; index: number }) {
         <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-cyan-100 text-xs font-bold text-cyan-700">
           {index + 1}
         </span>
-        <p className="text-sm font-semibold leading-snug text-slate-800 group-hover:text-slate-900">
+        <p className="text-sm font-semibold leading-snug text-slate-800 uppercase group-hover:text-slate-900">
           {item.label}
         </p>
       </div>

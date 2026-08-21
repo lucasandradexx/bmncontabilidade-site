@@ -57,7 +57,7 @@ const planos = [
     ],
     destaque: false,
     cta: "Escolher Essencial",
-    href: "https://wa.me/558194725310?text=Ol%C3%A1%2C%20quero%20conhecer%20o%20Plano%20Essencial%20de%20BPO%20Financeiro.",
+    href: "/bpo-financeiro/plano/essencial",
   },
   {
     nome: "Plano Performance",
@@ -72,7 +72,7 @@ const planos = [
     ],
     destaque: false,
     cta: "Escolher Performance",
-    href: "https://wa.me/558194725310?text=Ol%C3%A1%2C%20quero%20conhecer%20o%20Plano%20Performance%20de%20BPO%20Financeiro.",
+    href: "/bpo-financeiro/plano/performance",
   },
   {
     nome: "Plano Estratégico",
@@ -86,7 +86,7 @@ const planos = [
     ],
     destaque: true,
     cta: "Escolher Estratégico",
-    href: "https://wa.me/558194725310?text=Ol%C3%A1%2C%20quero%20conhecer%20o%20Plano%20Estrat%C3%A9gico%20de%20BPO%20Financeiro.",
+    href: "/bpo-financeiro/plano/estrategico",
   },
 ];
 

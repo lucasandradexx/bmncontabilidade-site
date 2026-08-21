@@ -28,7 +28,7 @@ const servicosLinks = [
   { label: "Abertura de Empresas", href: "/servicos/abertura-de-empresas" }, // 7
   { label: "Regularização de Empresas", href: "/servicos/regularizacao" }, // 8
   { label: "Folha de Pagamento", href: "/servicos/folha-de-pagamento" }, // 9
-  { label: "eSocial Doméstico", href: "/servicos/e-social-domestico" }, // 10
+  { label: "e-Social", href: "/servicos/e-social-domestico" }, // 10
   { label: "Imposto de Renda", href: "/servicos/imposto-de-renda" }, // 11
   { label: "Certificado Digital", href: "/servicos/certificado-digital" }, // 12
   { label: "Emissão de Notas", href: "/servicos/emissao-de-notas" }, // 13 (garanta que essa rota exista)

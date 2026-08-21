@@ -1,4 +1,13 @@
-export default function FormSection() {
+type FormSectionProps = {
+  titulo?: string;
+  buttonLabel?: string;
+};
+
+export default function FormSection({ titulo, buttonLabel }: FormSectionProps) {
+  const tituloExibido =
+    titulo ?? "Não sabe qual o plano ideal para sua empresa? Responda esse formulário e lhe auxiliaremos na escolha";
+  const textoBotao = buttonLabel ?? "Quero receber a indicação do plano ideal";
+
   return (
     <section className="bg-[#0b3f5e] py-16 text-white sm:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -6,7 +15,7 @@ export default function FormSection() {
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">BPO Financeiro</p>
             <h2 className="mt-4 text-2xl font-black text-white sm:text-3xl lg:text-4xl">
-              Não sabe qual o plano ideal para sua empresa? Responda esse formulário e lhe auxiliaremos na escolha
+              {tituloExibido}
             </h2>
           </div>
 
@@ -169,7 +178,7 @@ export default function FormSection() {
                 type="submit"
                 className="inline-flex w-full items-center justify-center rounded-xl bg-cyan-400 px-8 py-4 text-sm font-black uppercase tracking-wide text-slate-900 transition hover:bg-cyan-300 sm:w-auto"
               >
-                Quero receber a indicação do plano ideal
+                {textoBotao}
               </button>
             </div>
           </form>

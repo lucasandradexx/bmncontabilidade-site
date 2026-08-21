@@ -92,7 +92,7 @@ export default function ContatoForm() {
                 Horário de Atendimento
               </p>
               <p className="text-sm text-gray-500">
-                Segunda a sexta-feira, das 9h às 18h
+                Segunda a sexta-feira, das 9h às 17h
               </p>
             </div>
           </div>

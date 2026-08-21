@@ -133,90 +133,115 @@ export const SERVICOS: Servico[] = [
   {
     slug: "planejamento-tributario",
     titulo: "Planejamento Tributário",
-    resumo: "Estratégia fiscal para pagar tributos de forma correta e inteligente.",
+    resumo: "Elisão fiscal para reduzir a carga tributária dentro da lei, com segurança jurídica.",
     descricao:
-      "Analisamos o regime tributário, operação e estrutura da empresa para reduzir carga fiscal dentro da lei e evitar passivos.",
+      "Planejamento Tributário é o estudo técnico da operação da empresa para identificar, dentro da legalidade, o regime e as estratégias fiscais mais vantajosas, reduzindo a carga tributária sem correr riscos com o Fisco.\n\nNão é sonegação. É elisão fiscal: o uso de mecanismos previstos em lei para pagar exatamente o que é devido, e não mais do que isso. Muitas empresas pagam mais impostos do que deveriam simplesmente por estarem no regime tributário errado ou por não aproveitarem benefícios fiscais aos quais têm direito.\n\nO trabalho passa por simular cenários, comparar regimes e entender como cada decisão da empresa, contratação, faturamento, estrutura societária, impacta a carga tributária no curto e no longo prazo.",
     icone: "tributario",
     imagem: "/servicos/planejamento-tributario.jpg",
     destaque: "Eficiência tributária com segurança jurídica.",
     seo: {
       title: "Planejamento Tributário | BMN Contabilidade",
       description:
-        "Reduza carga tributária com segurança e conformidade legal por meio de estudo de regime e revisão fiscal.",
+        "Reduza a carga tributária dentro da lei com estudo de regime, simulação de cenários e identificação de benefícios fiscais.",
     },
     beneficios: [
-      "Redução legal de tributos",
-      "Prevenção de passivos fiscais",
-      "Escolha correta de regime tributário",
+      "Redução legal da carga tributária",
+      "Escolha do regime tributário mais adequado",
+      "Mais previsibilidade sobre custos fiscais",
+      "Identificação de benefícios fiscais aplicáveis",
+      "Segurança jurídica",
+      "Suporte para decisões estruturais",
     ],
     entregaveis: [
-      "Estudo comparativo de regimes",
-      "Mapa de oportunidades tributárias",
-      "Plano de enquadramento e revisão",
+      "Análise da operação, faturamento e regime tributário atual",
+      "Simulação de cenários e definição da estratégia mais vantajosa",
+      "Revisão periódica do planejamento conforme mudanças no negócio ou na legislação",
     ],
     paraQuem: [
-      "Empresas de comércio, serviços e indústria",
-      "Empresas em expansão",
-      "Negócios com alta carga tributária",
+      "Empresas que querem reduzir custos tributários dentro da lei",
+      "Negócios em fase de expansão ou mudança de atividade",
+      "Empresas avaliando mudança de regime tributário",
+      "Empresários que buscam segurança nas decisões fiscais",
+      "Negócios que nunca revisaram formalmente sua carga tributária",
     ],
     etapas: [
-      { titulo: "Levantamento", descricao: "Coleta de dados fiscais e operacionais." },
-      { titulo: "Simulação", descricao: "Comparação técnica de cenários tributários." },
-      { titulo: "Implementação", descricao: "Aplicação e monitoramento do novo modelo." },
+      { titulo: "Diagnóstico", descricao: "Análise da operação, do faturamento e do regime tributário atual da empresa, identificando pontos de atenção e oportunidades." },
+      { titulo: "Estruturação", descricao: "Simulação de cenários tributários e definição da estratégia mais vantajosa para o perfil e os planos da empresa." },
+      { titulo: "Acompanhamento", descricao: "Revisão periódica do planejamento, sempre que houver mudança relevante no negócio ou na legislação." },
     ],
     faq: [
       {
-        pergunta: "Planejamento tributário é legal?",
+        pergunta: "Planejamento tributário é o mesmo que sonegação?",
         resposta:
-          "Sim. Desde que feito com base na legislação e com documentação adequada, é plenamente legal.",
+          "Não. É elisão fiscal: reduzir tributos por meios lícitos e previstos em lei. Sonegação é omitir ou fraudar informações, algo que a BMN nunca recomenda ou pratica.",
       },
       {
-        pergunta: "Posso trocar de regime a qualquer momento?",
+        pergunta: "Com que frequência o planejamento deve ser revisado?",
         resposta:
-          "Depende do regime atual e das regras de opção. Em geral, a mudança é anual, com exceções específicas.",
+          "Idealmente ao menos uma vez por ano, ou sempre que houver mudança relevante no faturamento, na atividade ou na legislação tributária.",
+      },
+      {
+        pergunta: "Vale a pena para empresas pequenas?",
+        resposta:
+          "Sim. Muitas vezes é justamente nas empresas menores que a escolha errada de regime tributário pesa proporcionalmente mais no caixa.",
       },
     ],
     cta: CTA_PADRAO,
-    relacionados: ["obrigacoes-acessorias", "bpo-fiscal", "contabilidade-consultiva"],
+    relacionados: ["bpo-fiscal", "contabilidade-consultiva", "obrigacoes-acessorias"],
   },
 
   {
     slug: "obrigacoes-acessorias",
     titulo: "Obrigações Acessórias",
-    resumo: "Envio correto e no prazo de todas as declarações obrigatórias.",
+    resumo: "Declarações e informações enviadas corretamente e no prazo, sem depender da memória de ninguém.",
     descricao:
-      "Executamos e monitoramos suas obrigações acessórias para evitar multas, inconsistências e riscos fiscais.",
+      "Obrigações Acessórias são todas as declarações, informações e documentos que a empresa precisa enviar periodicamente aos órgãos fiscais, mesmo quando não há imposto a pagar naquele momento. É o \"dever de informar\" que acompanha o \"dever de pagar\".\n\nO calendário fiscal brasileiro é extenso (PGDAS, DCTF, EFD-Contribuições, SPED Fiscal, SPED Contábil, DEFIS, entre outras) e um único envio em atraso ou com erro pode gerar multa, mesmo que a empresa esteja em dia com todos os seus impostos.\n\nGarantimos que cada obrigação aplicável ao seu negócio seja identificada, calculada e enviada corretamente, dentro do calendário fiscal.",
     icone: "documentos",
     imagem: "/servicos/obrigacoes-acessorias.jpg",
     seo: {
       title: "Obrigações Acessórias | BMN Contabilidade",
       description:
-        "Gestão completa de declarações e obrigações acessórias com conformidade e controle de prazos.",
+        "Gestão completa das declarações fiscais obrigatórias (PGDAS, DCTF, SPED, DEFIS e outras) com controle ativo de prazos.",
     },
-    beneficios: ["Conformidade fiscal", "Menos risco de autuações", "Controle de prazos e protocolos"],
+    beneficios: [
+      "Cumprimento de prazos sem falhas",
+      "Redução do risco de multas",
+      "Visão completa das obrigações da empresa",
+      "Tranquilidade para focar no negócio",
+      "Consistência entre as declarações",
+    ],
     entregaveis: [
-      "Envio das declarações obrigatórias",
-      "Conferência de consistência",
-      "Relatório de competências entregues",
+      "Levantamento de todas as obrigações aplicáveis conforme regime, atividade e porte",
+      "Calendário fiscal completo com processos internos de apuração",
+      "Envio periódico das declarações com conferência antes da transmissão",
     ],
     paraQuem: [
-      "Empresas obrigadas a declarações fiscais e contábeis",
-      "Negócios que tiveram notificações",
-      "Empresas sem rotina interna de controle",
+      "Empresas de qualquer porte e regime tributário",
+      "Negócios que já sofreram multas por atraso ou erro em declarações",
+      "Empresários que buscam eliminar riscos fiscais silenciosos",
+      "Empresas em crescimento, que passam a ter mais obrigações à medida que faturam mais",
+      "Negócios que querem previsibilidade tributária no dia a dia",
     ],
     etapas: [
-      { titulo: "Mapeamento", descricao: "Identificação de todas as obrigações por regime e atividade." },
-      { titulo: "Execução", descricao: "Processamento e envio de cada obrigação dentro do prazo." },
-      { titulo: "Controle", descricao: "Acompanhamento de recibos, pendências e retificações." },
+      { titulo: "Diagnóstico", descricao: "Levantamento de todas as obrigações aplicáveis à empresa, considerando regime tributário, atividade e porte." },
+      { titulo: "Estruturação", descricao: "Organização do calendário fiscal completo e dos processos internos de apuração de cada obrigação." },
+      { titulo: "Acompanhamento", descricao: "Envio periódico das declarações, com controle ativo de prazos e conferência das informações antes da transmissão." },
     ],
     faq: [
       {
         pergunta: "Quais obrigações estão incluídas?",
-        resposta: "Variam conforme regime e atividade. Definimos isso no diagnóstico inicial.",
+        resposta:
+          "Depende do regime tributário da empresa, mas normalmente incluem declarações como PGDAS, DCTF, EFD-Contribuições, SPED Fiscal e Contábil, DEFIS, entre outras.",
       },
       {
-        pergunta: "Vocês fazem retificação se necessário?",
-        resposta: "Sim, analisamos impacto e realizamos a correção técnica quando aplicável.",
+        pergunta: "O que acontece se uma obrigação atrasar?",
+        resposta:
+          "Pode gerar multa e, em alguns casos, restrições fiscais para a empresa. Por isso mantemos controle ativo de todos os prazos, sem depender de lembretes manuais.",
+      },
+      {
+        pergunta: "Minha empresa é do Simples Nacional, ainda tenho obrigações acessórias?",
+        resposta:
+          "Sim. Mesmo empresas do Simples Nacional têm obrigações acessórias específicas, embora normalmente em menor volume que Lucro Presumido ou Real.",
       },
     ],
     cta: CTA_PADRAO,
@@ -226,40 +251,56 @@ export const SERVICOS: Servico[] = [
   {
     slug: "bpo-fiscal",
     titulo: "BPO Fiscal",
-    resumo: "Terceirização inteligente das rotinas fiscais da empresa.",
+    resumo: "Terceirização completa da apuração, emissão e envio das obrigações fiscais, com conformidade garantida.",
     descricao:
-      "Assumimos a operação fiscal com processo estruturado, controle e conformidade, liberando seu time para foco no core do negócio.",
+      "BPO Fiscal é a terceirização de toda a rotina de apuração, emissão e envio das obrigações fiscais da empresa: cálculo dos impostos devidos, emissão de guias, geração de declarações e cumprimento de cada prazo exigido pelo Fisco federal, estadual e municipal.\n\nA legislação tributária brasileira é complexa e muda com frequência. Um erro de apuração ou um prazo perdido pode gerar multa, inconsistências no CNPJ e até bloquear a emissão de certidões.\n\nDiferente de simplesmente \"enviar a obrigação no prazo\", o BPO Fiscal também identifica inconsistências antes que virem problema, cruzando dados fiscais com a operação real da empresa para reduzir o risco de autuações.",
     icone: "fiscal",
     imagem: "/servicos/bpo-fiscal.jpg",
     seo: {
       title: "BPO Fiscal | BMN Contabilidade",
       description:
-        "Terceirização fiscal com processos, compliance, apuração e controle para sua empresa operar com segurança.",
+        "Terceirização da rotina fiscal com apuração, emissão de guias e conformidade com o Fisco federal, estadual e municipal.",
     },
     beneficios: [
-      "Padronização de processos fiscais",
-      "Menor custo operacional interno",
-      "Acompanhamento técnico especializado",
+      "Conformidade fiscal garantida",
+      "Redução do risco de autuações e multas",
+      "Tranquilidade operacional",
+      "Adaptação ao regime tributário da empresa",
+      "Histórico fiscal organizado",
+      "Suporte em caso de notificação",
     ],
-    entregaveis: ["Apuração de tributos", "Escrituração fiscal", "Conciliação e relatórios fiscais"],
+    entregaveis: [
+      "Diagnóstico do regime tributário e das obrigações aplicáveis",
+      "Rotina de apuração e emissão com calendário próprio de prazos",
+      "Apuração, emissão e envio mensal das obrigações fiscais",
+    ],
     paraQuem: [
-      "Empresas com volume fiscal alto",
-      "Negócios sem time fiscal interno",
-      "Empresas que buscam escala com controle",
+      "Empresas com rotina fiscal complexa ou múltiplas obrigações",
+      "Negócios que estão migrando ou pretendem migrar de contabilidade",
+      "Empresas que já foram autuadas ou notificadas anteriormente",
+      "Empresários que buscam segurança e previsibilidade tributária",
+      "Negócios em crescimento que precisam de uma rotina fiscal que acompanhe esse ritmo",
     ],
     etapas: [
-      { titulo: "Transição", descricao: "Integração de documentos, sistemas e regras fiscais." },
-      { titulo: "Operação", descricao: "Execução recorrente de apurações e obrigações." },
-      { titulo: "Governança", descricao: "Indicadores, conferências e melhoria contínua." },
+      { titulo: "Diagnóstico", descricao: "Análise do regime tributário, enquadramento e das obrigações fiscais que já se aplicam (ou deveriam se aplicar) à operação." },
+      { titulo: "Estruturação", descricao: "Organização da rotina de apuração e emissão de documentos fiscais, com calendário próprio de prazos e checagens." },
+      { titulo: "Acompanhamento", descricao: "Execução da apuração, emissão e envio das obrigações fiscais mês a mês, monitorando prazos e mudanças na legislação." },
     ],
     faq: [
       {
-        pergunta: "Preciso trocar de sistema?",
-        resposta: "Nem sempre. Avaliamos integração com o sistema atual antes de qualquer mudança.",
+        pergunta: "O BPO Fiscal substitui o contador?",
+        resposta:
+          "Não substitui. É a execução operacional da rotina fiscal, sempre supervisionada pela equipe contábil da BMN, que responde tecnicamente por cada apuração.",
       },
       {
-        pergunta: "Como funciona a troca de documentos?",
-        resposta: "Pode ser via integração, nuvem compartilhada ou rotina definida com sua equipe.",
+        pergunta: "Serve para qualquer regime tributário?",
+        resposta:
+          "Sim. O serviço se adapta a Simples Nacional, Lucro Presumido e Lucro Real, cada um com suas particularidades de apuração.",
+      },
+      {
+        pergunta: "O que acontece se a empresa já tiver pendências fiscais?",
+        resposta:
+          "Fazemos o diagnóstico completo e, se necessário, encaminhamos junto com a Regularização de Empresas antes de estabilizar a rotina mensal.",
       },
     ],
     cta: CTA_PADRAO,
@@ -361,32 +402,61 @@ export const SERVICOS: Servico[] = [
   {
     slug: "gestao-financeira",
     titulo: "Gestão Financeira",
-    resumo: "Planejamento e controle financeiro para sustentação do crescimento.",
+    resumo: "Informações financeiras transformadas em decisão estratégica, com previsibilidade de caixa.",
     descricao:
-      "Aprimoramos indicadores, metas e rotinas para que a empresa tenha saúde financeira e base sólida para crescer.",
+      "Gestão Financeira é administrar o dinheiro da empresa de forma estratégica: planejar receitas e despesas, controlar custos, acompanhar indicadores financeiros, analisar resultados, projetar o fluxo de caixa e tomar decisões baseadas em informações confiáveis.\n\nEnquanto o BPO Financeiro organiza e executa a rotina financeira do dia a dia, a Gestão Financeira analisa essas informações para definir os rumos do negócio: qual investimento vale a pena, quanto a empresa pode se comprometer sem colocar o caixa em risco, e onde estão os desperdícios.\n\nEmpresas raramente encerram atividades só por falta de faturamento. Na maioria dos casos, encerram por não administrar adequadamente os recursos que tinham. É exatamente esse risco que a Gestão Financeira existe para evitar: transformar informação financeira em decisão de negócio, com segurança e previsibilidade.",
     icone: "gestao",
     imagem: "/servicos/gestao-financeira.jpg",
     seo: {
       title: "Gestão Financeira | BMN Contabilidade",
       description:
-        "Estruturação da gestão financeira com indicadores, metas e acompanhamento para decisões mais seguras.",
+        "Controle real dos resultados, previsibilidade de caixa e decisões estratégicas baseadas em dados para sua empresa crescer com equilíbrio.",
     },
-    beneficios: ["Melhor margem de lucro", "Controle de custos", "Planejamento de curto e médio prazo"],
-    entregaveis: ["Painel de indicadores financeiros", "Orçamento empresarial", "Plano de ação financeiro"],
-    paraQuem: ["Empresas com baixa margem", "Negócios em reestruturação", "Empresas com crescimento desordenado"],
+    beneficios: [
+      "Controle real dos resultados financeiros",
+      "Previsibilidade de caixa",
+      "Gestão eficiente do capital de giro",
+      "Redução de desperdícios",
+      "Base sólida para decisões estratégicas",
+      "Planejamento de curto, médio e longo prazo",
+    ],
+    entregaveis: [
+      "Diagnóstico completo de fluxo de caixa, custos e indicadores",
+      "Controles gerenciais e projeções financeiras estruturadas",
+      "Rotina de acompanhamento com recomendações práticas",
+    ],
+    paraQuem: [
+      "Empresas em fase de crescimento ou expansão de operações",
+      "Negócios com dificuldades recorrentes de fluxo de caixa",
+      "Empresários que querem aumentar a lucratividade, mas não sabem onde estão perdendo dinheiro",
+      "Empresas que pretendem buscar financiamento ou atrair investidores",
+      "Negócios que ainda tomam decisões financeiras \"no feeling\", sem indicadores de apoio",
+    ],
     etapas: [
-      { titulo: "Análise", descricao: "Leitura de resultados, custos e estrutura financeira." },
-      { titulo: "Planejamento", descricao: "Definição de metas, indicadores e prioridades." },
-      { titulo: "Acompanhamento", descricao: "Monitoramento contínuo com revisão de estratégia." },
+      { titulo: "Diagnóstico", descricao: "Análise dos demonstrativos, fluxo de caixa, custos, despesas, receitas e indicadores para identificar os gargalos financeiros." },
+      { titulo: "Estruturação", descricao: "Estruturação dos controles gerenciais, elaboração das projeções financeiras e avaliação da necessidade de capital de giro." },
+      { titulo: "Acompanhamento", descricao: "Reuniões periódicas para analisar indicadores, revisar projeções e orientar as próximas decisões com recomendações práticas." },
     ],
     faq: [
       {
-        pergunta: "É diferente de BPO financeiro?",
-        resposta: "Sim. O BPO executa a rotina; a gestão financeira atua no nível estratégico e gerencial.",
+        pergunta: "Gestão Financeira é a mesma coisa que BPO Financeiro?",
+        resposta:
+          "Não. O BPO Financeiro executa a rotina de contas a pagar, contas a receber e conciliação bancária. A Gestão Financeira usa essas informações para analisar indicadores, projetar cenários e apoiar decisões estratégicas. Muitas empresas contratam os dois juntos, mas são camadas diferentes.",
       },
       {
-        pergunta: "Quanto tempo para enxergar resultados?",
-        resposta: "Normalmente entre 60 e 120 dias, dependendo da maturidade do negócio.",
+        pergunta: "Minha empresa já tem contabilidade. Por que também preciso de Gestão Financeira?",
+        resposta:
+          "A contabilidade cuida do cumprimento das obrigações legais e fiscais. A Gestão Financeira olha para dentro do negócio: lucratividade real, capital de giro, fluxo de caixa projetado e viabilidade de investimentos.",
+      },
+      {
+        pergunta: "O que acontece se eu deixar isso de lado?",
+        resposta:
+          "Na prática, a empresa perde rentabilidade, opera sem capital de giro suficiente, aumenta o endividamento e toma decisões baseadas em percepção, não em dados, o que compromete a continuidade do negócio a médio prazo.",
+      },
+      {
+        pergunta: "Serve para empresas pequenas ou só para as grandes?",
+        resposta:
+          "Serve especialmente para quem está em crescimento ou sentindo dificuldade de fluxo de caixa. É justamente nesse momento que decisões mal fundamentadas custam mais caro.",
       },
     ],
     cta: CTA_PADRAO,
@@ -396,36 +466,56 @@ export const SERVICOS: Servico[] = [
   {
     slug: "folha-de-pagamento",
     titulo: "Folha de Pagamento",
-    resumo: "Processamento de folha com conformidade trabalhista e segurança.",
+    resumo: "Administração completa da remuneração dos colaboradores, do início ao fim.",
     descricao:
-      "Processamos admissões, férias, rescisões e folha mensal com precisão, reduzindo risco trabalhista e operacional.",
+      "Folha de Pagamento é a administração completa da remuneração dos colaboradores da empresa: cálculo de salários, encargos, benefícios, férias, décimo terceiro e rescisões, sempre em conformidade com a legislação trabalhista e previdenciária.\n\nErros na folha não são apenas um transtorno interno. Geram passivos trabalhistas, insatisfação dos colaboradores e risco de autuações. A legislação trabalhista brasileira tem particularidades que mudam conforme categoria, convenção coletiva e regime de contratação, o que torna esse cálculo mais delicado do que parece.\n\nA BMN assume essa rotina do início ao fim, cuidando de cada colaborador da admissão até a rescisão, com precisão e dentro dos prazos legais.",
     icone: "folha",
     imagem: "/servicos/folha-de-pagamento.jpg",
     seo: {
       title: "Folha de Pagamento | BMN Contabilidade",
       description:
-        "Gestão de folha, encargos e eventos trabalhistas com segurança e cumprimento legal.",
+        "Gestão completa da folha de pagamento: salários, encargos, férias, décimo terceiro e rescisões em conformidade legal.",
     },
-    beneficios: ["Conformidade trabalhista", "Redução de erros em cálculos", "Cumprimento de prazos legais"],
-    entregaveis: ["Folha mensal processada", "Guias e encargos", "Rotinas de admissão/demissão/férias"],
+    beneficios: [
+      "Cálculos corretos e dentro do prazo",
+      "Conformidade com legislação trabalhista e previdenciária",
+      "Gestão completa do ciclo do colaborador",
+      "Guias e impostos calculados corretamente (FGTS, INSS, IRRF)",
+      "Segurança jurídica",
+      "Tranquilidade para o RH ou para o próprio empresário",
+    ],
+    entregaveis: [
+      "Levantamento do quadro de colaboradores, regimes e convenções aplicáveis",
+      "Rotina de processamento com calendário e conferência antes do fechamento",
+      "Processamento mensal da folha com envio de guias e relatórios",
+    ],
     paraQuem: [
-      "Empresas com colaboradores CLT",
-      "Empresas sem departamento pessoal interno",
-      "Negócios em crescimento de equipe",
+      "Empresas com colaboradores registrados em CLT",
+      "Negócios que querem eliminar erros e riscos trabalhistas na folha",
+      "Empresários que não têm estrutura de RH própria",
+      "Empresas em crescimento, contratando novos colaboradores com frequência",
+      "Negócios que já tiveram problemas com cálculo de rescisão ou férias",
     ],
     etapas: [
-      { titulo: "Cadastro", descricao: "Organização de dados de colaboradores e regras internas." },
-      { titulo: "Processamento", descricao: "Cálculo mensal de folha e eventos trabalhistas." },
-      { titulo: "Fechamento", descricao: "Geração de guias, conferência e suporte de dúvidas." },
+      { titulo: "Diagnóstico", descricao: "Levantamento do quadro de colaboradores, dos regimes de contratação e das regras (convenções coletivas, benefícios) que se aplicam a cada caso." },
+      { titulo: "Estruturação", descricao: "Implantação da rotina de processamento da folha, com calendário definido e processos de conferência antes de cada fechamento." },
+      { titulo: "Acompanhamento", descricao: "Processamento mensal da folha, com envio de guias e relatórios, e suporte para admissões, férias e rescisões conforme surgem." },
     ],
     faq: [
       {
-        pergunta: "Vocês cuidam de admissões e rescisões?",
-        resposta: "Sim, conforme escopo contratado e documentação entregue pela empresa.",
+        pergunta: "O serviço inclui admissões e demissões?",
+        resposta:
+          "Sim, todo o ciclo do colaborador é contemplado, desde a admissão até a rescisão, incluindo os cálculos específicos de cada etapa.",
       },
       {
-        pergunta: "Atendem eSocial junto da folha?",
-        resposta: "Sim, folha e eSocial são tratados de forma integrada.",
+        pergunta: "Como funciona o envio de guias e impostos?",
+        resposta:
+          "A BMN calcula e disponibiliza as guias FGTS, INSS e IRRF dentro dos prazos legais para pagamento, evitando multas por atraso.",
+      },
+      {
+        pergunta: "E se minha empresa tem colaboradores em convenções coletivas diferentes?",
+        resposta:
+          "Sem problema. Consideramos as particularidades de cada convenção coletiva aplicável no cálculo da folha.",
       },
     ],
     cta: CTA_PADRAO,
@@ -434,193 +524,292 @@ export const SERVICOS: Servico[] = [
 
   {
     slug: "e-social-domestico",
-    titulo: "eSocial Doméstico",
-    resumo: "Regularização e gestão das obrigações do empregador doméstico.",
+    titulo: "e-Social",
+    resumo: "Envio correto e integrado de todos os eventos trabalhistas, previdenciários e fiscais dos colaboradores.",
     descricao:
-      "Cuidamos de toda a rotina do eSocial doméstico, com cálculos corretos, guias e suporte para evitar problemas legais.",
+      "e-Social é o sistema do governo que unifica o envio de informações trabalhistas, previdenciárias e fiscais relacionadas aos colaboradores da empresa. Cada admissão, alteração contratual, afastamento, férias ou rescisão precisa ser informada dentro de prazos específicos, e qualquer inconsistência pode impactar diretamente os encargos da empresa.\n\nÉ um sistema integrado por natureza: os dados enviados se conectam com a folha de pagamento, com as obrigações fiscais e com o histórico trabalhista de cada colaborador. Um erro em um evento pode gerar efeito cascata em outros, por isso esse serviço exige atenção técnica constante, e não apenas envio pontual.\n\nA BMN cuida de toda essa rotina, integrando o e-Social à folha de pagamento da empresa, para que cada evento seja enviado corretamente e no prazo certo.",
     icone: "esocial",
     imagem: "/servicos/e-social-domestico.jpg",
     seo: {
-      title: "eSocial Doméstico | BMN Contabilidade",
+      title: "e-Social | BMN Contabilidade",
       description:
-        "Suporte completo para empregador doméstico: cadastro, folha, guias e obrigações no eSocial.",
+        "Gestão integrada do e-Social: admissões, afastamentos, férias e rescisões enviados corretamente e no prazo, sem retrabalho.",
     },
-    beneficios: ["Regularidade no eSocial", "Cálculos corretos", "Tranquilidade para o empregador"],
-    entregaveis: ["Cadastro e parametrização", "Folha doméstica", "Geração de DAE e orientações"],
+    beneficios: [
+      "Cumprimento correto e no prazo dos eventos obrigatórios",
+      "Redução de riscos de inconsistências e multas",
+      "Integração completa com a folha de pagamento",
+      "Menos exposição a fiscalizações trabalhistas",
+      "Suporte técnico em casos específicos",
+    ],
+    entregaveis: [
+      "Levantamento dos eventos e prazos aplicáveis, considerando o quadro de colaboradores",
+      "Organização dos processos de envio integrados à folha de pagamento",
+      "Transmissão periódica dos eventos com monitoramento de pendências",
+    ],
     paraQuem: [
-      "Empregadores domésticos",
-      "Famílias que desejam regularizar vínculo",
-      "Quem já possui vínculo e quer apoio contínuo",
+      "Empresas com colaboradores registrados",
+      "Negócios que já tiveram inconsistências ou atrasos no envio de eventos",
+      "Empresários que querem eliminar riscos trabalhistas silenciosos",
+      "Empresas em crescimento, com admissões e mudanças de quadro frequentes",
+      "Negócios que preferem ter esse processo integrado à folha, sem retrabalho",
     ],
     etapas: [
-      { titulo: "Configuração", descricao: "Cadastro de empregador e empregado no sistema." },
-      { titulo: "Rotina", descricao: "Fechamento mensal com cálculo e guias." },
-      { titulo: "Eventos", descricao: "Gestão de férias, afastamentos e desligamentos." },
+      { titulo: "Diagnóstico", descricao: "Levantamento dos eventos e prazos aplicáveis à empresa, considerando o quadro de colaboradores e o histórico já enviado ao sistema." },
+      { titulo: "Estruturação", descricao: "Organização dos processos de envio e da integração entre o e-Social e a folha de pagamento da empresa." },
+      { titulo: "Acompanhamento", descricao: "Transmissão periódica dos eventos e monitoramento de pendências, inconsistências ou alertas do sistema." },
     ],
     faq: [
       {
-        pergunta: "Posso regularizar atrasados?",
-        resposta: "Sim, avaliamos o período e orientamos a regularização correta.",
+        pergunta: "O e-Social é obrigatório para todas as empresas com funcionários?",
+        resposta:
+          "Sim, toda empresa com colaboradores registrados precisa cumprir as obrigações do e-Social, independente do porte.",
       },
       {
-        pergunta: "Vocês dão suporte mensal?",
-        resposta: "Sim, com rotina contínua conforme plano contratado.",
+        pergunta: "O que acontece em caso de erro no envio?",
+        resposta:
+          "Pode gerar inconsistências que impactam os encargos da empresa e, em alguns casos, disparar fiscalizações. Por isso o acompanhamento técnico contínuo é essencial.",
+      },
+      {
+        pergunta: "O e-Social substitui outras obrigações trabalhistas?",
+        resposta:
+          "Ele unifica o envio de várias informações que antes eram enviadas separadamente, mas não elimina a necessidade de conformidade com a legislação trabalhista em si.",
       },
     ],
     cta: CTA_PADRAO,
-    relacionados: ["folha-de-pagamento", "regularizacao", "imposto-de-renda"],
+    relacionados: ["folha-de-pagamento", "bpo-fiscal", "obrigacoes-acessorias"],
   },
 
   {
     slug: "abertura-de-empresas",
     titulo: "Abertura de Empresas",
-    resumo: "Constituição de empresa com enquadramento correto desde o início.",
+    resumo: "Formalização completa da empresa, com enquadramento certo desde o início.",
     descricao:
-      "Cuidamos de todo o processo de abertura, definição de natureza jurídica, CNAEs e regime tributário para começar certo.",
+      "Abertura de CNPJ é o processo completo de formalização de uma empresa: definição do enquadramento jurídico e tributário, escolha da atividade (CNAE), elaboração dos documentos societários e registro nos órgãos competentes até a emissão do CNPJ.\n\nEssa etapa define muito do que vem depois. Escolher o enquadramento errado, uma atividade mal definida ou um regime tributário inadequado no início pode gerar retrabalho e custos evitáveis lá na frente. Por isso a abertura não é tratada como um processo burocrático isolado, mas como o primeiro passo de uma estrutura contábil e tributária pensada para o negócio.\n\nA empresa já sai desse processo com o CNPJ ativo e a rotina contábil estruturada, pronta para operar com segurança desde o primeiro dia.",
     icone: "abertura",
     imagem: "/servicos/abertura-de-empresas.jpg",
     seo: {
       title: "Abertura de Empresas | BMN Contabilidade",
       description:
-        "Abra sua empresa com segurança jurídica e tributária, com orientação completa em todas as etapas.",
+        "Abertura de CNPJ com enquadramento jurídico e tributário correto, documentos societários e contabilidade já estruturada.",
     },
-    beneficios: ["Abertura sem burocracia", "Enquadramento tributário adequado", "Início com conformidade"],
-    entregaveis: ["Viabilidade e registro", "CNPJ e inscrições", "Orientação inicial de operação fiscal e contábil"],
-    paraQuem: ["Empreendedores iniciantes", "Profissionais liberais", "Empresas migrando de MEI para outro porte"],
+    beneficios: [
+      "Processo de abertura ágil e sem erros",
+      "Escolha do enquadramento e regime mais adequados",
+      "Empresa pronta para operar de forma regular",
+      "Já sai com contabilidade estruturada",
+      "Orientação sobre próximos passos (inscrições e licenças)",
+    ],
+    entregaveis: [
+      "Levantamento do tipo de negócio, atividade e necessidades do empresário",
+      "Definição do enquadramento jurídico e tributário e registro dos documentos societários",
+      "Emissão do CNPJ e orientação sobre alvará, inscrições e início da rotina contábil",
+    ],
+    paraQuem: [
+      "Pessoas que estão iniciando um negócio",
+      "Profissionais autônomos que querem formalizar a atividade",
+      "Empresários que estão abrindo uma nova filial ou empresa",
+      "Sócios estruturando uma nova operação em conjunto",
+      "Quem quer começar já com a parte contábil e tributária organizada",
+    ],
     etapas: [
-      { titulo: "Planejamento", descricao: "Definição de atividade, porte e enquadramento." },
-      { titulo: "Registro", descricao: "Protocolos e formalização nos órgãos competentes." },
-      { titulo: "Implantação", descricao: "Parametrização inicial para operação regular." },
+      { titulo: "Diagnóstico", descricao: "Levantamento do tipo de negócio, da atividade pretendida e das necessidades específicas do empresário." },
+      { titulo: "Estruturação", descricao: "Definição do enquadramento jurídico e tributário mais adequado, e elaboração e registro dos documentos societários." },
+      { titulo: "Acompanhamento", descricao: "Emissão do CNPJ e orientação sobre os próximos passos: alvará, inscrições estaduais e municipais, e início da rotina contábil." },
     ],
     faq: [
       {
-        pergunta: "Quanto tempo leva para abrir empresa?",
-        resposta: "Depende da cidade e atividade, mas em média de alguns dias a poucas semanas.",
+        pergunta: "Quanto tempo leva para abrir uma empresa?",
+        resposta:
+          "Varia conforme o município e a atividade escolhida, mas o processo é conduzido de forma ágil pela BMN, sem etapas desnecessárias.",
       },
       {
-        pergunta: "Vocês ajudam na escolha do regime?",
-        resposta: "Sim, essa é uma etapa essencial para evitar custos desnecessários.",
+        pergunta: "Já saio com contador definido?",
+        resposta:
+          "Sim. A abertura já inclui a estruturação da rotina contábil da nova empresa, para que ela comece a operar em conformidade desde o primeiro dia.",
+      },
+      {
+        pergunta: "Como sei qual o melhor enquadramento para o meu negócio?",
+        resposta:
+          "Isso faz parte do diagnóstico inicial: avaliamos a atividade, o faturamento previsto e os planos da empresa para indicar o enquadramento mais vantajoso.",
       },
     ],
     cta: CTA_PADRAO,
-    relacionados: ["planejamento-tributario", "contabilidade-consultiva", "regularizacao"],
+    relacionados: ["regularizacao", "certificado-digital", "contabilidade-consultiva"],
   },
 
   {
     slug: "regularizacao",
-    titulo: "Regularização",
+    titulo: "Regularização de Empresas",
     resumo: "Coloque sua empresa em dia com o fisco e órgãos reguladores.",
     descricao:
-      "Atuamos na regularização de pendências fiscais, cadastrais e contábeis, com plano técnico para retomada da conformidade.",
+      "Regularização de Empresas é o serviço voltado para negócios com pendências fiscais, cadastrais ou societárias: situações que impedem a empresa de operar plenamente, emitir certidões, participar de licitações ou até renovar o CNPJ.\n\nEssas pendências costumam se acumular silenciosamente: uma obrigação não enviada, um débito não pago, uma alteração societária não registrada. Isoladamente, cada uma parece pequena, mas juntas colocam a empresa em situação de irregularidade, com consequências que vão desde multas até o bloqueio de operações.\n\nA BMN faz o levantamento completo da situação da empresa e conduz cada etapa da regularização, junto aos órgãos competentes, até a empresa voltar a operar de forma plena.",
     icone: "regularizacao",
     imagem: "/servicos/regularizacao.jpg",
     seo: {
-      title: "Regularização Empresarial | BMN Contabilidade",
+      title: "Regularização de Empresas | BMN Contabilidade",
       description:
-        "Regularize pendências fiscais e cadastrais com suporte técnico e plano de recuperação de conformidade.",
+        "Regularize pendências fiscais, cadastrais e societárias com diagnóstico completo e acompanhamento até a normalização.",
     },
-    beneficios: ["Redução de riscos de multas", "Recuperação da conformidade", "Retomada segura das operações"],
-    entregaveis: ["Diagnóstico de pendências", "Plano de regularização", "Acompanhamento até normalização"],
-    paraQuem: ["Empresas com pendências fiscais", "Negócios com CNPJ inapto/irregular", "Empresas com histórico de atraso"],
+    beneficios: [
+      "Empresa apta a operar sem restrições",
+      "Eliminação de riscos de bloqueios e multas",
+      "Acesso facilitado a crédito",
+      "Segurança para venda ou transferência da empresa",
+      "Tranquilidade jurídica",
+    ],
+    entregaveis: [
+      "Levantamento completo das pendências fiscais, cadastrais e societárias",
+      "Plano de regularização com ordem de prioridade e prazo estimado",
+      "Execução das ações junto aos órgãos até a regularização completa",
+    ],
+    paraQuem: [
+      "Empresas com pendências fiscais ou cadastrais acumuladas",
+      "Negócios que foram notificados por órgãos públicos",
+      "Empresários que precisam vender, transferir ou encerrar a empresa de forma regular",
+      "Empresas que estão inaptas ou com restrições junto à Receita Federal",
+      "Negócios que precisam de certidões negativas para contratos ou licitações",
+    ],
     etapas: [
-      { titulo: "Diagnóstico", descricao: "Mapeamento completo de débitos e pendências." },
-      { titulo: "Execução", descricao: "Correção de obrigações e protocolos necessários." },
-      { titulo: "Monitoramento", descricao: "Acompanhamento até a completa regularização." },
+      { titulo: "Diagnóstico", descricao: "Levantamento completo de todas as pendências fiscais, cadastrais e societárias junto aos órgãos competentes." },
+      { titulo: "Estruturação", descricao: "Elaboração do plano de regularização, com a ordem de prioridade das providências e o prazo estimado para cada etapa." },
+      { titulo: "Acompanhamento", descricao: "Execução das ações necessárias junto aos órgãos até a regularização completa, com atualização periódica sobre o andamento." },
     ],
     faq: [
       {
-        pergunta: "Empresa inapta pode voltar a operar?",
-        resposta: "Sim, em muitos casos é possível reativar após regularização adequada.",
+        pergunta: "Quais tipos de pendência podem ser regularizados?",
+        resposta:
+          "Débitos fiscais, obrigações acessórias em atraso, situação cadastral irregular junto à Receita Federal e pendências societárias, entre outras.",
       },
       {
-        pergunta: "Vocês parcelam débitos?",
-        resposta: "Orientamos e executamos o parcelamento quando houver viabilidade.",
+        pergunta: "Quanto tempo leva o processo?",
+        resposta:
+          "Varia conforme a complexidade da situação. Após o diagnóstico, apresentamos um prazo estimado e realista para a regularização completa.",
+      },
+      {
+        pergunta: "Minha empresa está inapta na Receita Federal, ainda dá para regularizar?",
+        resposta:
+          "Sim. É um dos cenários mais comuns que atendemos. O diagnóstico vai identificar exatamente o que precisa ser feito para reverter a situação.",
       },
     ],
     cta: CTA_PADRAO,
-    relacionados: ["obrigacoes-acessorias", "bpo-fiscal", "abertura-de-empresas"],
+    relacionados: ["abertura-de-empresas", "obrigacoes-acessorias", "bpo-fiscal"],
   },
 
   {
     slug: "imposto-de-renda",
     titulo: "Imposto de Renda",
-    resumo: "Declaração e planejamento do IR para pessoa física e empresarial.",
+    resumo: "Apuração e declaração de IRPF e IRPJ com segurança e aproveitamento de deduções legais.",
     descricao:
-      "Realizamos declaração, revisão e planejamento do IR para reduzir riscos de malha fina e otimizar sua situação tributária.",
+      "Imposto de Renda é a apuração e declaração anual de rendimentos, tanto para pessoa física (IRPF) quanto para pessoa jurídica (IRPJ), garantindo o cumprimento correto das obrigações junto à Receita Federal.\n\nErros ou omissões na declaração podem levar à malha fina, gerar cobranças retroativas e multas. Por outro lado, uma declaração bem feita pode identificar deduções legais que muitos contribuintes deixam de aproveitar por desconhecimento.\n\nA BMN cuida de todo esse processo, do levantamento dos documentos até o envio da declaração, e permanece disponível para dar suporte caso surja alguma exigência da Receita Federal depois do envio.",
     icone: "irpf",
     imagem: "/servicos/imposto-de-renda.jpg",
     seo: {
       title: "Imposto de Renda | BMN Contabilidade",
       description:
-        "Declaração de IR com segurança, revisão de dados e planejamento para evitar inconsistências.",
+        "Declaração de IRPF e IRPJ com aproveitamento de deduções legais, conferência antes do envio e suporte em exigências.",
     },
-    beneficios: ["Declaração correta e segura", "Menos risco de inconsistência", "Acompanhamento de pendências"],
-    entregaveis: ["Preenchimento e envio da declaração", "Conferência documental", "Suporte pós-envio"],
-    paraQuem: ["Pessoa física", "Sócios e administradores", "Profissionais com múltiplas fontes de renda"],
+    beneficios: [
+      "Declaração correta e dentro do prazo",
+      "Aproveitamento de deduções legais permitidas",
+      "Redução do risco de malha fina",
+      "Suporte em caso de exigências da Receita Federal",
+      "Atendimento para pessoa física e jurídica em um único lugar",
+    ],
+    entregaveis: [
+      "Levantamento dos dados e documentos necessários",
+      "Apuração dos valores devidos ou a restituir e elaboração da declaração",
+      "Envio dentro do prazo e suporte em eventuais exigências",
+    ],
+    paraQuem: [
+      "Pessoas físicas com obrigação de declarar",
+      "Empresas que precisam declarar o IRPJ",
+      "Quem já caiu na malha fina e precisa de suporte para regularização",
+      "Contribuintes que suspeitam estar pagando mais imposto do que deveriam",
+      "Quem busca segurança e aproveitamento correto das deduções legais",
+    ],
     etapas: [
-      { titulo: "Coleta", descricao: "Recebimento e organização dos documentos necessários." },
-      { titulo: "Apuração", descricao: "Análise, preenchimento e conferência técnica." },
-      { titulo: "Envio", descricao: "Transmissão, recibo e orientações de acompanhamento." },
+      { titulo: "Diagnóstico", descricao: "Levantamento dos dados e documentos necessários para a declaração, sejam eles de pessoa física ou jurídica." },
+      { titulo: "Estruturação", descricao: "Apuração dos valores devidos ou a restituir e elaboração da declaração com atenção às deduções aplicáveis." },
+      { titulo: "Acompanhamento", descricao: "Envio da declaração dentro do prazo e suporte em eventuais exigências ou notificações da Receita Federal." },
     ],
     faq: [
       {
-        pergunta: "Vocês retificam declaração já enviada?",
-        resposta: "Sim, avaliamos o caso e fazemos a retificação quando necessário.",
+        pergunta: "O serviço atende pessoa física e jurídica?",
+        resposta:
+          "Sim, a BMN atende tanto a declaração de Imposto de Renda Pessoa Física (IRPF) quanto a de Pessoa Jurídica (IRPJ).",
       },
       {
-        pergunta: "Atendem IR de pessoa jurídica?",
-        resposta: "Sim, conforme regime e tipo de obrigação da empresa.",
+        pergunta: "E se eu cair na malha fina?",
+        resposta:
+          "A BMN presta suporte completo para identificar o motivo, reunir a documentação necessária e responder às exigências da Receita Federal até a regularização.",
+      },
+      {
+        pergunta: "Posso perder prazo e ainda assim declarar?",
+        resposta:
+          "Sim, mas normalmente com incidência de multa. Por isso, quanto antes reunirmos a documentação, menor o risco de atraso.",
       },
     ],
     cta: CTA_PADRAO,
-    relacionados: ["contabilidade-consultiva", "planejamento-tributario", "e-social-domestico"],
+    relacionados: ["planejamento-tributario", "obrigacoes-acessorias", "contabilidade-consultiva"],
   },
 
   {
     slug: "certificado-digital",
     titulo: "Certificado Digital",
-    resumo: "Emissão e renovação de certificado para pessoa física e jurídica.",
+    resumo: "Identidade digital com validade jurídica para acessar sistemas fiscais e assinar documentos.",
     descricao:
-      "Apoiamos na escolha, emissão e renovação de certificado digital para garantir assinatura eletrônica e acesso aos sistemas oficiais.",
+      "Certificado Digital é o documento eletrônico que garante a identidade da empresa ou da pessoa física no ambiente digital, com validade jurídica equivalente a uma assinatura física. É por meio dele que a empresa acessa sistemas fiscais, assina contratos digitalmente e cumpre obrigações que exigem autenticação eletrônica, incluindo o e-Social.\n\nSem o certificado digital válido, a empresa pode ficar impedida de emitir notas fiscais, enviar obrigações fiscais ou assinar documentos com validade legal. É um detalhe simples, mas que pode travar a operação em um momento crítico se não for renovado a tempo.\n\nA BMN cuida de todo o processo, desde a identificação do tipo de certificado necessário até a emissão e orientação sobre uso e renovação.",
     icone: "certificado",
     imagem: "/servicos/certificado-digital.jpg",
     seo: {
       title: "Certificado Digital | BMN Contabilidade",
       description:
-        "Emissão e renovação de certificado digital com orientação técnica para uso em operações fiscais e contábeis.",
+        "Emissão de e-CNPJ e e-CPF com validação presencial ou por videoconferência e orientação sobre uso e renovação.",
     },
     beneficios: [
-      "Segurança nas assinaturas digitais",
-      "Agilidade em processos eletrônicos",
-      "Conformidade com exigências legais",
+      "Acesso a serviços fiscais e bancários online sem interrupções",
+      "Assinatura digital de documentos com validade jurídica",
+      "Processo de emissão rápido e assistido",
+      "Conformidade com obrigações que exigem certificado",
+      "Orientação sobre prazos de renovação",
     ],
     entregaveis: [
-      "Orientação de tipo de certificado",
-      "Suporte na emissão/renovação",
-      "Apoio para instalação e uso",
+      "Identificação do tipo de certificado necessário (e-CNPJ ou e-CPF)",
+      "Agendamento e condução da validação, presencial ou por videoconferência",
+      "Emissão do certificado e orientação sobre uso e renovação",
     ],
     paraQuem: [
-      "Empresas e sócios",
-      "Profissionais liberais",
-      "Pessoas físicas com demandas de assinatura digital",
+      "Empresas que precisam cumprir obrigações fiscais online",
+      "Negócios com colaboradores registrados no e-Social",
+      "Empresários que precisam assinar documentos digitalmente com validade jurídica",
+      "Empresas com certificado prestes a vencer",
+      "Quem está abrindo uma nova empresa e ainda não possui certificado digital",
     ],
     etapas: [
-      { titulo: "Escolha", descricao: "Definição do certificado ideal para o seu uso." },
-      { titulo: "Emissão", descricao: "Conferência de documentos e processo de validação." },
-      { titulo: "Ativação", descricao: "Suporte para instalação e testes iniciais." },
+      { titulo: "Diagnóstico", descricao: "Identificação do tipo de certificado necessário para a empresa ou pessoa física, e-CNPJ ou e-CPF, conforme o uso pretendido." },
+      { titulo: "Estruturação", descricao: "Agendamento e condução da validação, presencial ou por videoconferência, conforme a modalidade escolhida." },
+      { titulo: "Acompanhamento", descricao: "Emissão do certificado e orientação sobre o uso correto e o prazo de renovação, para evitar surpresas de última hora." },
     ],
     faq: [
       {
-        pergunta: "Qual validade do certificado?",
-        resposta: "Depende do tipo contratado. Existem opções com diferentes prazos de validade.",
+        pergunta: "Qual a validade do certificado digital?",
+        resposta:
+          "Geralmente de 1 a 3 anos, dependendo do tipo e da mídia escolhida (cartão, token ou nuvem).",
       },
       {
-        pergunta: "Vocês ajudam na renovação?",
-        resposta: "Sim, fazemos todo o acompanhamento para renovação no prazo correto.",
+        pergunta: "É obrigatório para todas as empresas?",
+        resposta:
+          "É obrigatório para diversas obrigações fiscais e para empresas que possuem funcionários registrados no e-Social, entre outras situações.",
+      },
+      {
+        pergunta: "Posso emitir o certificado por videoconferência?",
+        resposta:
+          "Sim, dependendo da modalidade escolhida, o processo pode ser feito totalmente à distância, sem necessidade de deslocamento.",
       },
     ],
     cta: CTA_PADRAO,
-    relacionados: ["obrigacoes-acessorias", "folha-de-pagamento", "bpo-fiscal"],
+    relacionados: ["abertura-de-empresas", "e-social-domestico", "regularizacao"],
   },
   {
     slug: "emissao-de-notas",
