@@ -16,6 +16,7 @@ import {
 
 type PageProps = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ enviado?: string; erro?: string }>;
 };
 
 export function generateStaticParams() {
@@ -41,8 +42,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function ServicoPage({ params }: PageProps) {
+export default async function ServicoPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
+  const { enviado, erro } = await searchParams;
   const servico = getServicoBySlug(slug);
 
   if (!servico) notFound();
@@ -222,10 +224,24 @@ export default async function ServicoPage({ params }: PageProps) {
             <aside className="space-y-6">
               {exibirFormulario ? (
                 <div className="rounded-2xl border border-cyan-100/20 bg-[#0b3f5e]/55 p-6 text-slate-100 backdrop-blur-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+                  {enviado ? (
+                    <div className="py-4 text-center">
+                      <h3 className="font-bold text-white">Recebemos sua solicitação!</h3>
+                      <p className="mt-2 text-sm text-slate-100/85">
+                        Em breve nossa equipe entrará em contato com você.
+                      </p>
+                    </div>
+                  ) : (
+                  <>
                   <h3 className="font-bold text-white">{tituloFormulario}</h3>
                   <p className="mt-2 text-sm text-slate-100/85">
                     Preencha os dados abaixo e nossa equipe entrará em contato.
                   </p>
+                  {erro && (
+                    <p className="mt-3 text-sm text-red-300">
+                      Não foi possível enviar sua solicitação. Tente novamente.
+                    </p>
+                  )}
 
                   <form action="/api/lead-servico" method="POST" className="mt-4 space-y-4">
                     {/* Campos ocultos para identificação do serviço */}
@@ -438,6 +454,8 @@ export default async function ServicoPage({ params }: PageProps) {
                       Enviar solicitação
                     </button>
                   </form>
+                  </>
+                  )}
                 </div>
               ) : null}
             </aside>

@@ -1,12 +1,70 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
+
 type FormSectionProps = {
   titulo?: string;
   buttonLabel?: string;
+};
+
+const ROTULOS: Record<string, string> = {
+  nome: "Nome",
+  razaoSocial: "Razão Social",
+  cnpj: "CNPJ",
+  email: "E-mail",
+  telefone: "Telefone / WhatsApp",
+  segmento: "Segmento",
+  regimeTributacao: "Regime de tributação",
+  quantidadeColaboradores: "Quantidade de colaboradores",
+  faturamento: "Faturamento",
+  jaPossuiContador: "Já possui contador",
+  desejaMigrar: "Deseja migrar de contabilidade",
+  volumeTransacoes: "Volume de transações",
+  descricaoEmpresa: "Sobre a empresa",
 };
 
 export default function FormSection({ titulo, buttonLabel }: FormSectionProps) {
   const tituloExibido =
     titulo ?? "Não sabe qual o plano ideal para sua empresa? Responda esse formulário e lhe auxiliaremos na escolha";
   const textoBotao = buttonLabel ?? "Quero receber a indicação do plano ideal";
+
+  const [enviando, setEnviando] = useState(false);
+  const [enviado, setEnviado] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setEnviando(true);
+    setErro(null);
+
+    const formData = new FormData(event.currentTarget);
+    const campos = Object.entries(ROTULOS)
+      .map(([campo, label]) => {
+        const valor = formData.get(campo);
+        return valor ? { label, valor: String(valor) } : null;
+      })
+      .filter((c): c is { label: string; valor: string } => c !== null);
+
+    try {
+      const res = await fetch("/api/contato", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          assunto: "Novo lead: BPO Financeiro",
+          campos,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Falha no envio");
+
+      setEnviado(true);
+      event.currentTarget.reset();
+    } catch {
+      setErro("Não foi possível enviar sua mensagem. Tente novamente em instantes.");
+    } finally {
+      setEnviando(false);
+    }
+  }
 
   return (
     <section className="bg-[#0b3f5e] py-16 text-white sm:py-20">
@@ -19,7 +77,22 @@ export default function FormSection({ titulo, buttonLabel }: FormSectionProps) {
             </h2>
           </div>
 
-          <form className="mt-8 grid gap-5 sm:mt-10 md:grid-cols-2">
+          {enviado ? (
+            <div className="mx-auto mt-10 max-w-xl rounded-2xl border border-cyan-300/30 bg-white/5 p-8 text-center">
+              <h3 className="text-xl font-bold text-white">Recebemos sua solicitação!</h3>
+              <p className="mt-2 text-sm text-cyan-50">
+                Em breve nossa equipe entrará em contato com a indicação do plano ideal.
+              </p>
+              <button
+                type="button"
+                onClick={() => setEnviado(false)}
+                className="mt-6 inline-flex items-center justify-center rounded-xl bg-cyan-400 px-6 py-3 text-sm font-black uppercase tracking-wide text-slate-900 transition hover:bg-cyan-300"
+              >
+                Enviar outra solicitação
+              </button>
+            </div>
+          ) : (
+          <form onSubmit={handleSubmit} className="mt-8 grid gap-5 sm:mt-10 md:grid-cols-2">
             <div className="md:col-span-1">
               <label className="mb-2 block text-sm font-medium text-cyan-50">Nome *</label>
               <input
@@ -173,15 +246,18 @@ export default function FormSection({ titulo, buttonLabel }: FormSectionProps) {
               />
             </div>
 
-            <div className="md:col-span-2 flex justify-center">
+            <div className="md:col-span-2 flex flex-col items-center gap-3">
+              {erro && <p className="text-sm text-red-300">{erro}</p>}
               <button
                 type="submit"
-                className="inline-flex w-full items-center justify-center rounded-xl bg-cyan-400 px-8 py-4 text-sm font-black uppercase tracking-wide text-slate-900 transition hover:bg-cyan-300 sm:w-auto"
+                disabled={enviando}
+                className="inline-flex w-full items-center justify-center rounded-xl bg-cyan-400 px-8 py-4 text-sm font-black uppercase tracking-wide text-slate-900 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
               >
-                {textoBotao}
+                {enviando ? "Enviando..." : textoBotao}
               </button>
             </div>
           </form>
+          )}
         </div>
       </div>
     </section>

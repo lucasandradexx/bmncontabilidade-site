@@ -27,6 +27,7 @@ export default function ContatoForm() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
   const [enviado,   setEnviado]   = useState(false);
   const [enviando,  setEnviando]  = useState(false);
+  const [erro,      setErro]      = useState<string | null>(null);
 
   const {
     register,
@@ -37,12 +38,33 @@ export default function ContatoForm() {
 
   async function onSubmit(data: FormData) {
     setEnviando(true);
-    /* ── Substitua aqui pela sua integração de e-mail / API ── */
-    await new Promise((r) => setTimeout(r, 1500));
-    console.log("Dados do formulário:", data);
-    setEnviando(false);
-    setEnviado(true);
-    reset();
+    setErro(null);
+
+    try {
+      const res = await fetch("/api/contato", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          assunto: `Novo contato do site — ${data.assunto}`,
+          campos: [
+            { label: "Nome", valor: data.nome },
+            { label: "WhatsApp", valor: data.telefone },
+            { label: "E-mail", valor: data.email },
+            { label: "Assunto", valor: data.assunto },
+            { label: "Mensagem", valor: data.mensagem || "—" },
+          ],
+        }),
+      });
+
+      if (!res.ok) throw new Error("Falha no envio");
+
+      setEnviado(true);
+      reset();
+    } catch {
+      setErro("Não foi possível enviar sua mensagem. Tente novamente em instantes.");
+    } finally {
+      setEnviando(false);
+    }
   }
 
   return (
@@ -253,6 +275,9 @@ export default function ContatoForm() {
 
                     {/* Botão enviar */}
                     <div className="sm:col-span-2">
+                      {erro && (
+                        <p className="mb-3 text-xs text-red-500">{erro}</p>
+                      )}
                       <button
                         type="submit"
                         disabled={enviando}

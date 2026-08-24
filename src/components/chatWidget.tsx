@@ -1,61 +1,131 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { FLUXO_CONVERSA, NO_INICIAL, type CampoLead } from "@/lib/chatFlow";
 
-const SUGGESTIONS = [
-  {
-    question: "Quero abrir uma empresa",
-    answer:
-      "Perfeito! Posso te ajudar com o tipo societário, documentação necessária e próximos passos para começar com segurança.",
-    followUps: [],
-  },
-  {
-    question: "Como funciona o planejamento tributário?",
-    answer:
-      "O planejamento tributário identifica a melhor forma de pagar menos impostos dentro da lei, deixando sua empresa mais competitiva e segura.",
-    followUps: [],
-  },
-  {
-    question: "Quais serviços vocês oferecem para o meu negócio?",
-    answer:
-      "Oferecemos contabilidade consultiva, abertura de empresas, BPO fiscal/financeiro, gestão financeira e suporte tributário completo.",
-    followUps: [],
-  },
-];
+type Mensagem = { role: "user" | "bot"; text: string };
+type RespostasLead = Partial<Record<CampoLead, string>>;
 
-const INITIAL_MESSAGE =
-  "Olá, sou o Assistente da BMN. Como posso lhe ajudar hoje?";
+const ROTULOS_LEAD: Record<CampoLead, string> = {
+  nome: "Nome",
+  produtoServico: "Produto ou serviço",
+  funcionamentoNegocio: "Como funciona o negócio",
+  clientesAlvo: "Clientes-alvo",
+  formatoAtividade: "Formato da atividade",
+  razaoSocialCnpj: "Nome da empresa e CNPJ",
+  atividadePrincipal: "Atividade principal",
+  faturamentoMedio: "Faturamento médio mensal",
+  motivoTroca: "Motivo da troca",
+  expectativaNovaContabilidade: "O que espera da nova contabilidade",
+  prazoTroca: "Prazo para trocar",
+  telefone: "Telefone",
+};
+
+function mensagemInicial(): Mensagem[] {
+  const no = FLUXO_CONVERSA[NO_INICIAL];
+  return no.tipo === "pergunta_aberta" ? [{ role: "bot", text: no.pergunta }] : [];
+}
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
-  const [availableSuggestions, setAvailableSuggestions] = useState(SUGGESTIONS);
-  const [messages, setMessages] = useState<Array<{ role: "user" | "bot"; text: string }>>([
-    { role: "bot", text: INITIAL_MESSAGE },
-  ]);
+  const [messages, setMessages] = useState<Mensagem[]>(mensagemInicial);
+  const [currentNodeId, setCurrentNodeId] = useState(NO_INICIAL);
+  const [respostas, setRespostas] = useState<RespostasLead>({});
+  const [inputValue, setInputValue] = useState("");
   const [typing, setTyping] = useState(false);
+  const [enviandoLead, setEnviandoLead] = useState(false);
+  const [leadEnviado, setLeadEnviado] = useState(false);
+  const [erroLead, setErroLead] = useState(false);
 
-  const handleSuggestion = (index: number) => {
-    const suggestion = availableSuggestions[index];
-    setAvailableSuggestions(suggestion.followUps ?? []);
-    setMessages((prev) => [
-      ...prev,
-      { role: "user", text: suggestion.question },
-    ]);
+  const noAtual = FLUXO_CONVERSA[currentNodeId];
+  const fimDasMensagensRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    fimDasMensagensRef.current?.scrollIntoView({ block: "end" });
+  }, [messages, typing, noAtual.tipo, enviandoLead, leadEnviado, erroLead]);
+
+  async function enviarLead(respostasFinais: RespostasLead) {
+    setEnviandoLead(true);
+    setErroLead(false);
+
+    const campos = Object.entries(respostasFinais)
+      .filter((entry): entry is [CampoLead, string] => Boolean(entry[1]))
+      .map(([campo, valor]) => ({ label: ROTULOS_LEAD[campo], valor }));
+
+    try {
+      const res = await fetch("/api/contato", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          assunto: `Novo lead via chat do site — ${respostasFinais.nome ?? "Visitante"}`,
+          campos,
+        }),
+      });
+      if (!res.ok) throw new Error("Falha no envio");
+      setLeadEnviado(true);
+    } catch {
+      setErroLead(true);
+    } finally {
+      setEnviandoLead(false);
+    }
+  }
+
+  function mostrarNo(nodeId: string, respostasAtuais: RespostasLead = respostas) {
+    const no = FLUXO_CONVERSA[nodeId];
+    if (!no) return;
+
+    setCurrentNodeId(nodeId);
     setTyping(true);
+
     setTimeout(() => {
       setTyping(false);
-      setMessages((prev) => [
-        ...prev,
-        { role: "bot", text: suggestion.answer },
-      ]);
+      const texto = no.tipo === "fim" || no.tipo === "informativo" ? no.mensagem : no.pergunta;
+      setMessages((prev) => [...prev, { role: "bot", text: texto }]);
+
+      if (no.tipo === "informativo") {
+        setTimeout(() => mostrarNo(no.proximo, respostasAtuais), 900);
+      }
+      if (no.tipo === "fim") {
+        enviarLead(respostasAtuais);
+      }
     }, 600);
-  };
+  }
+
+  function handleOpcao(opcao: { texto: string; proximo: string }) {
+    setMessages((prev) => [...prev, { role: "user", text: opcao.texto }]);
+    mostrarNo(opcao.proximo);
+  }
+
+  function handleEscolhaUnica(opcaoTexto: string) {
+    if (noAtual.tipo !== "escolha_unica") return;
+
+    const novasRespostas: RespostasLead = { ...respostas, [noAtual.campo]: opcaoTexto };
+    setRespostas(novasRespostas);
+    setMessages((prev) => [...prev, { role: "user", text: opcaoTexto }]);
+    mostrarNo(noAtual.proximo, novasRespostas);
+  }
+
+  function handleEnviarResposta() {
+    if (noAtual.tipo !== "pergunta_aberta") return;
+    const valor = inputValue.trim();
+    if (!valor) return;
+
+    const novasRespostas: RespostasLead = { ...respostas, [noAtual.campo]: valor };
+    setRespostas(novasRespostas);
+    setMessages((prev) => [...prev, { role: "user", text: valor }]);
+    setInputValue("");
+    mostrarNo(noAtual.proximo, novasRespostas);
+  }
 
   const resetChat = () => {
-    setAvailableSuggestions(SUGGESTIONS);
-    setMessages([{ role: "bot", text: INITIAL_MESSAGE }]);
+    setMessages(mensagemInicial());
+    setCurrentNodeId(NO_INICIAL);
+    setRespostas({});
+    setInputValue("");
     setTyping(false);
+    setEnviandoLead(false);
+    setLeadEnviado(false);
+    setErroLead(false);
   };
 
   return (
@@ -122,23 +192,96 @@ export default function ChatWidget() {
                 </div>
               )}
 
-              {availableSuggestions.length > 0 && (
+              {!typing && noAtual.tipo === "menu" && (
                 <div className="self-start rounded-3xl bg-white p-3 shadow-sm">
                   <div className="grid gap-3">
-                    {availableSuggestions.map((item, index) => (
+                    {noAtual.opcoes.map((opcao) => (
                       <button
-                        key={item.question}
+                        key={opcao.texto}
                         type="button"
-                        onClick={() => handleSuggestion(index)}
+                        onClick={() => handleOpcao(opcao)}
                         className="w-full cursor-pointer rounded-2xl border border-[#139A9E] bg-white px-3 py-3 text-left text-xs font-semibold text-[#139A9E] transition hover:bg-[#effdfb]"
                       >
-                        {item.question}
+                        {opcao.texto}
                       </button>
                     ))}
                   </div>
                 </div>
               )}
+
+              {!typing && noAtual.tipo === "escolha_unica" && (
+                <div className="self-start rounded-3xl bg-white p-3 shadow-sm">
+                  <div className="grid gap-3">
+                    {noAtual.opcoes.map((opcaoTexto) => (
+                      <button
+                        key={opcaoTexto}
+                        type="button"
+                        onClick={() => handleEscolhaUnica(opcaoTexto)}
+                        className="w-full cursor-pointer rounded-2xl border border-[#139A9E] bg-white px-3 py-3 text-left text-xs font-semibold text-[#139A9E] transition hover:bg-[#effdfb]"
+                      >
+                        {opcaoTexto}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {!typing && noAtual.tipo === "fim" && (
+                <div className="self-start rounded-3xl bg-white px-4 py-3 text-left shadow-sm">
+                  {enviandoLead && (
+                    <p className="text-xs text-slate-500">Enviando suas informações...</p>
+                  )}
+                  {leadEnviado && (
+                    <p className="text-xs text-emerald-600">Informações enviadas com sucesso ✓</p>
+                  )}
+                  {erroLead && (
+                    <p className="text-xs text-red-500">
+                      Não foi possível enviar suas informações. Tente novamente mais tarde.
+                    </p>
+                  )}
+                </div>
+              )}
+
+              <div ref={fimDasMensagensRef} />
             </div>
+
+            {!typing && noAtual.tipo === "pergunta_aberta" && (
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  handleEnviarResposta();
+                }}
+                className="mt-3 flex items-center gap-2"
+              >
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={(event) => setInputValue(event.target.value)}
+                  placeholder="Digite sua resposta..."
+                  autoFocus
+                  className="w-full rounded-full border border-slate-200 px-4 py-2 text-xs text-slate-800 outline-none transition focus:border-secondary"
+                />
+                <button
+                  type="submit"
+                  disabled={!inputValue.trim()}
+                  className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full bg-secondary text-white transition disabled:cursor-not-allowed disabled:opacity-50"
+                  aria-label="Enviar resposta"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M22 2 11 13" />
+                    <path d="M22 2 15 22l-4-9-9-4Z" />
+                  </svg>
+                </button>
+              </form>
+            )}
           </div>
         </div>
       )}
