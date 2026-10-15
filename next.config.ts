@@ -1,21 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      /* Domínio principal do site */
+  async redirects() {
+    return [
+      // BPO Financeiro passou a seguir o padrão /servicos/...
       {
-        protocol: "https",
-        hostname: "barralcontabilidade.com.br",
-        pathname: "/**",
+        source: "/bpo-financeiro",
+        destination: "/servicos/bpo-financeiro",
+        permanent: true,
       },
-      /* Domínio de staging (usado nos banners) */
+      // As páginas de plano viraram o botão "Quero uma proposta".
       {
-        protocol: "https",
-        hostname: "barralcontabilidade-com-br.us.stackstaging.com",
-        pathname: "/**",
+        source: "/bpo-financeiro/plano/:slug",
+        destination: "/servicos/bpo-financeiro#planos",
+        permanent: true,
       },
-    ],
+    ];
   },
 };
 

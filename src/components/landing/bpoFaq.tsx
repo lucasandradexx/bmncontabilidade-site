@@ -4,7 +4,9 @@ import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { FaChevronDown } from "react-icons/fa";
 
-const PERGUNTAS = [
+type Pergunta = { pergunta: string; resposta: string };
+
+const PERGUNTAS: Pergunta[] = [
   {
     pergunta: "A BMN vai ter acesso ao meu dinheiro?",
     resposta:
@@ -13,7 +15,7 @@ const PERGUNTAS = [
   {
     pergunta: "Minha empresa é muito pequena, o BPO serve para mim?",
     resposta:
-      "Sim! O Plano Essencial foi criado exatamente para microempresas que precisam de organização desde o início e contarem com um suporte financeiro acessível.",
+      "Sim. O Plano Essencial foi pensado para microempresas que precisam organizar a rotina financeira desde o início.",
   },
   {
     pergunta: "Como envio os documentos para vocês?",
@@ -32,7 +34,7 @@ const PERGUNTAS = [
   },
 ];
 
-export default function BpoFaq() {
+export default function BpoFaq({ perguntas = PERGUNTAS }: { perguntas?: Pergunta[] }) {
   const [aberto, setAberto] = useState<number | null>(0);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -49,7 +51,7 @@ export default function BpoFaq() {
         </div>
 
         <div className="space-y-3">
-          {PERGUNTAS.map((item, i) => (
+          {perguntas.map((item, i) => (
             <div
               key={i}
               className={`overflow-hidden rounded-xl border transition-all duration-500 ${

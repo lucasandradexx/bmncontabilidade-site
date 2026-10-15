@@ -1,25 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { SITE_URL } from "@/lib/site";
+import Analytics from "@/components/analytics";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "BMN Contabilidade",
+    default: "BMN Contabilidade Estratégica | Contabilidade para PMEs de todo o Brasil",
     template: "%s | BMN Contabilidade",
   },
-  description: "Contabilidade estratégica",
+  description:
+    "Contabilidade estratégica para pequenas e médias empresas de todo o Brasil: diagnóstico fiscal, planejamento tributário e preparação para a Reforma.",
   icons: {
     icon: "/icon.svg",
   },
@@ -33,7 +24,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" data-scroll-behavior="smooth">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

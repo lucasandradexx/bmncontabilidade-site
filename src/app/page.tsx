@@ -14,6 +14,7 @@ import Mapa from "@/components/landing/mapa";
 import CookieNotice from "@/components/landing/cookieNotice";
 import Hub from "@/components/landing/hub";
 import ChatWidget from "@/components/chatWidget";
+import { MENSAGENS_WHATSAPP, waLink } from "@/lib/empresa";
 
 export default function Home() {
   return (
@@ -54,13 +55,12 @@ export default function Home() {
 
         {/* CTA intermediário */}
         <BannerCTA
-          subtitulo="Transforme intenção em ação."
-          titulo="O sucesso exige movimento!"
-          descricao="Construa uma trajetória sólida ao lado de profissionais que transformam
-                     planejamento em ação, decisões em resultados e gestão em vantagem competitiva."
-          textoBotao="Comece agora!"
-          href="https://wa.me/558194725310"
-          externo
+          subtitulo="Reforma Tributária"
+          titulo="Antes de pagar mais imposto, entenda o que muda com a Reforma."
+          descricao="O Raio-X da Reforma mostra o que a CBS e o IBS mudam no preço e na margem
+                     da sua empresa, quando muda e quais decisões precisam ser tomadas agora."
+          textoBotao="Conhecer o Raio-X da Reforma"
+          href="/reforma-tributaria"
         />
 
         {/* FAQ */}
@@ -75,12 +75,11 @@ export default function Home() {
 
         {/* CTA final */}
         <BannerCTA
-          titulo="Pronto para transformar números em decisões inteligentes?"
-          descricao="Com a BMN Contabilidade, você ganha clareza, segurança e vantagem
-                     competitiva. Chegou a hora de estruturar seu negócio com precisão
-                     técnica e estratégia de alto nível."
-          textoBotao="Fale com nossa equipe!"
-          href="https://wa.me/558194725310"
+          titulo="Pensando em trocar de contador?"
+          descricao="Converse com os sócios da BMN e veja como funciona a troca, sem burocracia
+                     e com atendimento 100% digital para empresas de todo o Brasil."
+          textoBotao="Quero trocar de contador"
+          href={waLink(MENSAGENS_WHATSAPP.trocaContador)}
           externo
         />
       </main>

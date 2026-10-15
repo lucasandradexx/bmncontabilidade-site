@@ -5,17 +5,18 @@ type Processo = {
 };
 
 type ProcessSectionProps = {
+  titulo: string;
   passos: Processo[];
 };
 
-export default function ProcessSection({ passos }: ProcessSectionProps) {
+export default function ProcessSection({ titulo, passos }: ProcessSectionProps) {
   return (
     <section className="bg-white py-16 text-slate-900 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">Como funciona</p>
           <h2 className="mt-4 text-2xl font-black text-slate-900 sm:text-3xl lg:text-4xl">
-            Como a BMN transforma o seu financeiro em 3 passos:
+            {titulo}
           </h2>
         </div>
 

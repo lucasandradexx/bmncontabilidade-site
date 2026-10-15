@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Dados provisórios do blog (posts e imagens enviadas pelo painel)
+/data/

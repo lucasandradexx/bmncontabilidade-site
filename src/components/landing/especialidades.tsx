@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { FaStore, FaHeadset, FaUserTie } from "react-icons/fa";
 import { ReactNode } from "react";
 
-const WA_LINK = "https://wa.me/558194725310";
+import { waLink } from "@/lib/empresa";
+
+const WA_LINK = waLink();
 
 interface Card {
   icone:    ReactNode;
@@ -38,27 +40,18 @@ const CARDS: Card[] = [
 export default function Especialidades() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.15 });
   const carouselRef = useRef<HTMLDivElement | null>(null);
-  const [indiceAtivo, setIndiceAtivo] = useState(0);
-
-  const moverParaIndice = (proximoIndice: number) => {
-    const container = carouselRef.current;
-    const cards = container?.querySelectorAll("[data-card-slide]");
-    const card = cards?.[proximoIndice] as HTMLElement | undefined;
-
-    if (!container || !card) return;
-
-    const left = card.offsetLeft - 12;
-    container.scrollTo({ left, behavior: "smooth" });
-    setIndiceAtivo(proximoIndice);
-  };
+  // Ref, não state: o índice só controla a rolagem e não muda o que é renderizado.
+  const indiceAtivo = useRef(0);
 
   useEffect(() => {
     const id = window.setInterval(() => {
-      setIndiceAtivo((atual) => {
-        const proximo = (atual + 1) % CARDS.length;
-        moverParaIndice(proximo);
-        return proximo;
-      });
+      const proximo = (indiceAtivo.current + 1) % CARDS.length;
+      const container = carouselRef.current;
+      const card = container?.querySelectorAll<HTMLElement>("[data-card-slide]")[proximo];
+      if (!container || !card) return;
+
+      container.scrollTo({ left: card.offsetLeft - 12, behavior: "smooth" });
+      indiceAtivo.current = proximo;
     }, 4200);
 
     return () => window.clearInterval(id);

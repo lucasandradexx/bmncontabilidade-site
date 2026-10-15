@@ -3,8 +3,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const WA_LINK =
-  "https://wa.me/558194725310?text=Ol%C3%A1!%20Encontrei%20seu%20site%20atrav%C3%A9s%20do%20Google%20e%20estou%20interessado(a)%20em%20saber%20mais%20sobre%20seus%20servi%C3%A7os.%20Poderia%20me%20fornecer%20mais%20informa%C3%A7%C3%B5es,%20por%20favor?";
+import { MENSAGENS_WHATSAPP, waLink } from "@/lib/empresa";
+
+const FAIXA = [
+  "100% digital",
+  "Empresas de todos os estados",
+  "Sócios no atendimento",
+  "CRC-PE 033381/O-0",
+];
 
 const SLIDES = [
   "/slides/slide-1.jpg",
@@ -15,13 +21,6 @@ const SLIDES = [
 
 export default function Hero() {
   const [atual, setAtual] = useState(0);
-  const [visivel, setVisivel] = useState(false);
-
-  // Inicia animações após mount
-  useEffect(() => {
-    setVisivel(true);
-  }, []);
-
   // Troca slide a cada 5s
   useEffect(() => {
     const t = setInterval(() => {
@@ -62,56 +61,57 @@ export default function Hero() {
       {/* Conteúdo */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 sm:pt-28 sm:pb-24 lg:py-28">
         <div className="max-w-xl sm:max-w-2xl">
-          {/* H1 invisível para SEO */}
-          <h1 className="sr-only">Contabilidade em Recife - PE | BMN Contabilidade</h1>
-
           {/* Título */}
-          <h2
+          <h1
             className={`font-extrabold text-white leading-[1.08] mb-5
                         text-[clamp(1.95rem,8.5vw,3.25rem)]
-                        transition-all duration-700
-                        ${visivel ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                        opacity-0 animate-fade-up`}
           >
-            Mais que números: tecnologia, estratégia e resultado.
-          </h2>
+            A Reforma Tributária já começou. Sua empresa está preparada?
+          </h1>
 
           {/* Descrição */}
           <p
             className={`text-white/85 leading-relaxed mb-7 max-w-[62ch]
                         text-[clamp(0.98rem,4.1vw,1.125rem)]
-                        transition-all duration-700 delay-200
-                        ${visivel ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                        opacity-0 animate-fade-up [animation-delay:200ms]`}
           >
-            Na BMN Contabilidade, trabalhamos com foco em precisão técnica,
-            inteligência financeira e direcionamento estratégico. Com sede em Recife-PE,
-            atendemos empresas em Pernambuco e em todo o Brasil, sem limitar nossa
-            expertise a fronteiras geográficas.
+            Contabilidade estratégica para pequenas e médias empresas de todo o Brasil.
+            Diagnóstico fiscal, planejamento tributário e acompanhamento com tecnologia,
+            direto com os sócios.
           </p>
 
           {/* Botões CTA: preenchido + vazado */}
           <div
-            className={`transition-all duration-700 delay-300
-                        ${visivel ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+            className="opacity-0 animate-fade-up [animation-delay:300ms]"
           >
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
-                href={WA_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/diagnostico-fiscal"
                 className="btn btn-primary inline-flex w-full sm:w-auto justify-center items-center gap-3 !text-base !px-7 !py-4"
               >
-                Abra a sua empresa
+                Quero meu Diagnóstico Fiscal gratuito
               </Link>
 
               <Link
-                href={WA_LINK}
+                href={waLink(MENSAGENS_WHATSAPP.trocaContador)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-outline-primary inline-flex w-full sm:w-auto justify-center items-center gap-3 !text-base !px-7 !py-4"
               >
-                Agende a sua reunião
+                Quero trocar de contador
               </Link>
             </div>
+
+            {/* Faixa de confiança */}
+            <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-2 text-xs font-semibold uppercase tracking-wide text-white/80 sm:text-[13px]">
+              {FAIXA.map((item, i) => (
+                <li key={item} className="flex items-center gap-3">
+                  {i > 0 && <span className="text-secondary" aria-hidden>·</span>}
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Indicadores do slideshow */}

@@ -6,6 +6,16 @@ import { FaChevronDown } from "react-icons/fa";
 
 const PERGUNTAS = [
   {
+    pergunta: "Vocês atendem empresas fora de Pernambuco?",
+    resposta:
+      "Sim. O atendimento é 100% digital: WhatsApp com quem cuida da conta, reuniões on-line com os sócios, Área do Cliente e acesso aos órgãos por certificado digital ou procuração eletrônica. A sede fica em Recife-PE, e atendemos empresas de todos os estados.",
+  },
+  {
+    pergunta: "O que é o Diagnóstico Fiscal gratuito?",
+    resposta:
+      "Verificamos sua empresa na Receita Federal, na PGFN, na Secretaria da Fazenda e na Prefeitura e apresentamos um relatório com as pendências encontradas e os caminhos possíveis. Sem custo e sem obrigação de contratar.",
+  },
+  {
     pergunta: "Quanto tempo leva para abrir uma empresa?",
     resposta:
       "O prazo médio varia entre 5 e 15 dias, dependendo da atividade, localização do endereço e agilidade na entrega das informações. Com documentação correta e análise prévia adequada, o processo tende a ser mais rápido e previsível.",

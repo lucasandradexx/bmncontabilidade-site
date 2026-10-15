@@ -1,5 +1,7 @@
 // src/lib/servicos.ts
 
+import { MENSAGENS_WHATSAPP, waLink } from "@/lib/empresa";
+
 export type IconeServico =
   | "consultoria"
   | "tributario"
@@ -17,16 +19,6 @@ export type IconeServico =
 export type EtapaServico = {
   titulo: string;
   descricao: string;
-};
-
-export type PlanoServico = {
-  nome: "Basic" | "Platinum" | "Diamond" | string;
-  descricao: string;
-  preco?: string;
-  recursos: string[];
-  destaque?: boolean;
-  ctaTexto?: string;
-  ctaHref?: string;
 };
 
 export type FAQItem = {
@@ -64,21 +56,25 @@ export type Servico = {
   cta: CTA;
   relacionados: string[];
   mostrarFormulario?: boolean;
-  planos?: PlanoServico[];
+  // Mensagem pronta do WhatsApp. Sem ela, usa o modelo "Vim pela página de [serviço]...".
+  whatsappMensagem?: string;
 };
-
-const WA_MESSAGE = encodeURIComponent(
-  "Olá! Quero saber mais sobre os serviços da BMN."
-);
 
 const CTA_PADRAO: CTA = {
   titulo: "Vamos estruturar esse serviço no seu negócio?",
   descricao:
-    "Fale com nossa equipe e receba um plano de atendimento conforme a sua realidade.",
-  botaoTexto: "Falar com especialista",
-  botaoHref: `https://wa.me/558194725310?text=${WA_MESSAGE}`,
+    "Fale com quem cuida da sua conta e receba um plano de atendimento conforme a sua realidade.",
+  botaoTexto: "Falar com a BMN no WhatsApp",
+  botaoHref: waLink(),
   externo: true,
 };
+
+export function mensagemWhatsappServico(servico: Servico) {
+  return (
+    servico.whatsappMensagem ??
+    `Olá! Vim pela página de ${servico.titulo} do site e gostaria de mais informações.`
+  );
+}
 
 export const SERVICOS: Servico[] = [
   {
@@ -91,7 +87,7 @@ export const SERVICOS: Servico[] = [
     imagem: "/servicos/contabilidade-consultiva.jpg",
     destaque: "Decisão baseada em números reais.",
     seo: {
-      title: "Contabilidade Consultiva | BMN Contabilidade",
+      title: "Contabilidade Consultiva",
       description:
         "Apoio contábil estratégico com indicadores, análise de desempenho e plano de ação para sua empresa crescer com segurança.",
     },
@@ -133,19 +129,19 @@ export const SERVICOS: Servico[] = [
   {
     slug: "planejamento-tributario",
     titulo: "Planejamento Tributário",
-    resumo: "Elisão fiscal para reduzir a carga tributária dentro da lei, com segurança jurídica.",
+    resumo: "Escolha do regime e simulação de cenários, dentro da lei, incluindo os efeitos da Reforma Tributária.",
     descricao:
-      "Planejamento Tributário é o estudo técnico da operação da empresa para identificar, dentro da legalidade, o regime e as estratégias fiscais mais vantajosas, reduzindo a carga tributária sem correr riscos com o Fisco.\n\nNão é sonegação. É elisão fiscal: o uso de mecanismos previstos em lei para pagar exatamente o que é devido, e não mais do que isso. Muitas empresas pagam mais impostos do que deveriam simplesmente por estarem no regime tributário errado ou por não aproveitarem benefícios fiscais aos quais têm direito.\n\nO trabalho passa por simular cenários, comparar regimes e entender como cada decisão da empresa, contratação, faturamento, estrutura societária, impacta a carga tributária no curto e no longo prazo.",
+      "Planejamento Tributário é o estudo técnico da operação da empresa para identificar, dentro da legalidade, o regime e as estratégias fiscais mais adequados ao negócio, sem correr riscos com o Fisco.\n\nNão é sonegação. É elisão fiscal: o uso de mecanismos previstos em lei para pagar exatamente o que é devido. O regime tributário inadequado ou benefícios fiscais não aproveitados podem pesar no caixa sem que o empresário perceba.\n\nO trabalho passa por simular cenários, comparar regimes e entender como cada decisão da empresa (contratação, faturamento, estrutura societária) e a transição para a CBS e o IBS afetam os tributos no curto e no longo prazo.",
     icone: "tributario",
     imagem: "/servicos/planejamento-tributario.jpg",
-    destaque: "Eficiência tributária com segurança jurídica.",
+    destaque: "Decisões tributárias com números e segurança jurídica.",
     seo: {
-      title: "Planejamento Tributário | BMN Contabilidade",
+      title: "Planejamento Tributário",
       description:
-        "Reduza a carga tributária dentro da lei com estudo de regime, simulação de cenários e identificação de benefícios fiscais.",
+        "Escolha do regime, simulação de cenários e preparação para a CBS e o IBS, dentro da lei, para pequenas e médias empresas de todo o Brasil.",
     },
     beneficios: [
-      "Redução legal da carga tributária",
+      "Decisões tributárias baseadas em simulações",
       "Escolha do regime tributário mais adequado",
       "Mais previsibilidade sobre custos fiscais",
       "Identificação de benefícios fiscais aplicáveis",
@@ -158,7 +154,8 @@ export const SERVICOS: Servico[] = [
       "Revisão periódica do planejamento conforme mudanças no negócio ou na legislação",
     ],
     paraQuem: [
-      "Empresas que querem reduzir custos tributários dentro da lei",
+      "Empresas que querem entender o custo tributário das suas decisões",
+      "Empresas que precisam se preparar para a Reforma Tributária",
       "Negócios em fase de expansão ou mudança de atividade",
       "Empresas avaliando mudança de regime tributário",
       "Empresários que buscam segurança nas decisões fiscais",
@@ -199,7 +196,7 @@ export const SERVICOS: Servico[] = [
     icone: "documentos",
     imagem: "/servicos/obrigacoes-acessorias.jpg",
     seo: {
-      title: "Obrigações Acessórias | BMN Contabilidade",
+      title: "Obrigações Acessórias",
       description:
         "Gestão completa das declarações fiscais obrigatórias (PGDAS, DCTF, SPED, DEFIS e outras) com controle ativo de prazos.",
     },
@@ -251,18 +248,18 @@ export const SERVICOS: Servico[] = [
   {
     slug: "bpo-fiscal",
     titulo: "BPO Fiscal",
-    resumo: "Terceirização completa da apuração, emissão e envio das obrigações fiscais, com conformidade garantida.",
+    resumo: "Terceirização da apuração, emissão e envio das obrigações fiscais, com conferência antes de cada entrega.",
     descricao:
       "BPO Fiscal é a terceirização de toda a rotina de apuração, emissão e envio das obrigações fiscais da empresa: cálculo dos impostos devidos, emissão de guias, geração de declarações e cumprimento de cada prazo exigido pelo Fisco federal, estadual e municipal.\n\nA legislação tributária brasileira é complexa e muda com frequência. Um erro de apuração ou um prazo perdido pode gerar multa, inconsistências no CNPJ e até bloquear a emissão de certidões.\n\nDiferente de simplesmente \"enviar a obrigação no prazo\", o BPO Fiscal também identifica inconsistências antes que virem problema, cruzando dados fiscais com a operação real da empresa para reduzir o risco de autuações.",
     icone: "fiscal",
     imagem: "/servicos/bpo-fiscal.jpg",
     seo: {
-      title: "BPO Fiscal | BMN Contabilidade",
+      title: "BPO Fiscal",
       description:
         "Terceirização da rotina fiscal com apuração, emissão de guias e conformidade com o Fisco federal, estadual e municipal.",
     },
     beneficios: [
-      "Conformidade fiscal garantida",
+      "Rotina fiscal com conferência antes de cada entrega",
       "Redução do risco de autuações e multas",
       "Tranquilidade operacional",
       "Adaptação ao regime tributário da empresa",
@@ -305,6 +302,7 @@ export const SERVICOS: Servico[] = [
     ],
     cta: CTA_PADRAO,
     relacionados: ["obrigacoes-acessorias", "planejamento-tributario", "regularizacao"],
+    whatsappMensagem: MENSAGENS_WHATSAPP.bpoFiscal,
   },
 
   {
@@ -316,9 +314,9 @@ export const SERVICOS: Servico[] = [
     icone: "financeiro",
     imagem: "/servicos/bpo-financeiro.jpg",
     seo: {
-      title: "BPO Financeiro | BMN Contabilidade",
+      title: "BPO Financeiro",
       description:
-        "Terceirização financeira com controle de caixa, conciliações, contas e relatórios gerenciais.",
+        "BPO Financeiro para pequenas e médias empresas de todo o Brasil: contas a pagar e receber, conciliação e relatórios. Nada é pago sem sua aprovação.",
     },
     beneficios: ["Organização do financeiro", "Maior previsibilidade de caixa", "Apoio para tomada de decisão"],
     entregaveis: [
@@ -348,55 +346,7 @@ export const SERVICOS: Servico[] = [
     ],
     cta: CTA_PADRAO,
     relacionados: ["gestao-financeira", "contabilidade-consultiva", "folha-de-pagamento"],
-    planos: [
-      {
-        nome: "Plano BNM Essencial",
-        descricao: "Para microempresas e profissionais liberais que precisam organizar a casa.",
-        preco: "A partir de R$ 300,00 / mês",
-        recursos: [
-          "1 conta bancária parceira (Banco Cora)",
-          "Até 50 transações financeiras mensais",
-          "Emissão de até 16 Notas Fiscais/mês",
-          "Conciliação bancária mensal",
-          "Organização digital de documentos",
-          "Relatório mensal do Fluxo de Caixa",
-        ],
-        ctaTexto: "Quero o Plano Essencial",
-        ctaHref: `https://wa.me/558194725310?text=${encodeURIComponent("Olá! Tenho interesse no plano BNM Essencial de BPO Financeiro.")}`,
-      },
-      {
-        nome: "Plano BNM Performance",
-        descricao: "Para pequenas empresas em crescimento que precisam de agilidade e dados gerenciais.",
-        preco: "A partir de R$ 497,00 / mês",
-        destaque: true,
-        recursos: [
-          "Gestão de até 2 contas bancárias",
-          "Até 200 transações financeiras mensais",
-          "Emissão de Notas Fiscais e Boletos (até 30/mês)",
-          "Conciliação bancária diária",
-          "Agendamento de pagamentos no banco",
-          "Apresentação mensal do Fluxo de Caixa e DRE",
-        ],
-        ctaTexto: "Quero o Plano Performance",
-        ctaHref: `https://wa.me/558194725310?text=${encodeURIComponent("Olá! Tenho interesse no plano BNM Performance de BPO Financeiro.")}`,
-      },
-      {
-        nome: "Plano BNM Estratégico",
-        descricao: "Para médias empresas e startups que exigem gestão robusta e inteligência de dados.",
-        preco: "A partir de R$ 850,00 / mês",
-        recursos: [
-          "Múltiplas contas e integração com seu ERP",
-          "Volume de transações e notas sob medida",
-          "Gestão ativa de inadimplência (cobrança)",
-          "Dashboards financeiros em tempo real (BI)",
-          "Projeção de Fluxo de Caixa (3 a 6 meses)",
-          "Reunião mensal de consultoria estratégica",
-        ],
-        ctaTexto: "Quero o Plano Estratégico",
-        ctaHref: `https://wa.me/558194725310?text=${encodeURIComponent("Olá! Tenho interesse no plano BNM Estratégico de BPO Financeiro.")}`,
-      },
-    ],
-
+    whatsappMensagem: MENSAGENS_WHATSAPP.propostaBpoFinanceiro,
   },
 
   {
@@ -408,7 +358,7 @@ export const SERVICOS: Servico[] = [
     icone: "gestao",
     imagem: "/servicos/gestao-financeira.jpg",
     seo: {
-      title: "Gestão Financeira | BMN Contabilidade",
+      title: "Gestão Financeira",
       description:
         "Controle real dos resultados, previsibilidade de caixa e decisões estratégicas baseadas em dados para sua empresa crescer com equilíbrio.",
     },
@@ -472,7 +422,7 @@ export const SERVICOS: Servico[] = [
     icone: "folha",
     imagem: "/servicos/folha-de-pagamento.jpg",
     seo: {
-      title: "Folha de Pagamento | BMN Contabilidade",
+      title: "Folha de Pagamento",
       description:
         "Gestão completa da folha de pagamento: salários, encargos, férias, décimo terceiro e rescisões em conformidade legal.",
     },
@@ -520,6 +470,7 @@ export const SERVICOS: Servico[] = [
     ],
     cta: CTA_PADRAO,
     relacionados: ["e-social-domestico", "bpo-financeiro", "obrigacoes-acessorias"],
+    whatsappMensagem: "Olá! Vim pela página de Folha de Pagamento e tenho funcionários.",
   },
 
   {
@@ -531,7 +482,7 @@ export const SERVICOS: Servico[] = [
     icone: "esocial",
     imagem: "/servicos/e-social-domestico.jpg",
     seo: {
-      title: "e-Social | BMN Contabilidade",
+      title: "e-Social",
       description:
         "Gestão integrada do e-Social: admissões, afastamentos, férias e rescisões enviados corretamente e no prazo, sem retrabalho.",
     },
@@ -589,7 +540,7 @@ export const SERVICOS: Servico[] = [
     icone: "abertura",
     imagem: "/servicos/abertura-de-empresas.jpg",
     seo: {
-      title: "Abertura de Empresas | BMN Contabilidade",
+      title: "Abertura de Empresas",
       description:
         "Abertura de CNPJ com enquadramento jurídico e tributário correto, documentos societários e contabilidade já estruturada.",
     },
@@ -636,6 +587,7 @@ export const SERVICOS: Servico[] = [
     ],
     cta: CTA_PADRAO,
     relacionados: ["regularizacao", "certificado-digital", "contabilidade-consultiva"],
+    whatsappMensagem: "Olá! Vim pela página de Abertura e quero abrir minha empresa.",
   },
 
   {
@@ -647,7 +599,7 @@ export const SERVICOS: Servico[] = [
     icone: "regularizacao",
     imagem: "/servicos/regularizacao.jpg",
     seo: {
-      title: "Regularização de Empresas | BMN Contabilidade",
+      title: "Regularização de Empresas",
       description:
         "Regularize pendências fiscais, cadastrais e societárias com diagnóstico completo e acompanhamento até a normalização.",
     },
@@ -694,6 +646,7 @@ export const SERVICOS: Servico[] = [
     ],
     cta: CTA_PADRAO,
     relacionados: ["abertura-de-empresas", "obrigacoes-acessorias", "bpo-fiscal"],
+    whatsappMensagem: "Olá! Vim pela página de Regularização e minha empresa tem pendências.",
   },
 
   {
@@ -705,7 +658,7 @@ export const SERVICOS: Servico[] = [
     icone: "irpf",
     imagem: "/servicos/imposto-de-renda.jpg",
     seo: {
-      title: "Imposto de Renda | BMN Contabilidade",
+      title: "Imposto de Renda",
       description:
         "Declaração de IRPF e IRPJ com aproveitamento de deduções legais, conferência antes do envio e suporte em exigências.",
     },
@@ -763,7 +716,7 @@ export const SERVICOS: Servico[] = [
     icone: "certificado",
     imagem: "/servicos/certificado-digital.jpg",
     seo: {
-      title: "Certificado Digital | BMN Contabilidade",
+      title: "Certificado Digital",
       description:
         "Emissão de e-CNPJ e e-CPF com validação presencial ou por videoconferência e orientação sobre uso e renovação.",
     },
@@ -821,7 +774,7 @@ export const SERVICOS: Servico[] = [
     imagem: "/servicos/emissao-de-notas.jpg",
     destaque: "Notas emitidas com precisão e menos risco de autuação.",
     seo: {
-      title: "Emissão de Notas | BMN Contabilidade",
+      title: "Emissão de Notas",
       description:
         "Serviço de emissão de notas fiscais (NF-e e NFS-e) com validação tributária, controle de rejeições e conformidade fiscal.",
     },

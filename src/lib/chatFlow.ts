@@ -123,7 +123,7 @@ export const FLUXO_CONVERSA: Record<string, NoConversa> = {
   "abrir-empresa-5": {
     tipo: "pergunta_aberta",
     id: "abrir-empresa-5",
-    pergunta: "Me informe seu telefone para que nossos especialistas entrem em contato.",
+    pergunta: "Me informe seu telefone para que nossa equipe entre em contato.",
     campo: "telefone",
     proximo: "abrir-empresa-fim",
   },
@@ -131,7 +131,7 @@ export const FLUXO_CONVERSA: Record<string, NoConversa> = {
     tipo: "fim",
     id: "abrir-empresa-fim",
     mensagem:
-      "Perfeito! Recebemos suas informações e em breve um especialista da BMN vai entrar em contato para te ajudar a abrir sua empresa.",
+      "Perfeito! Recebemos suas informações e em breve alguém da nossa equipe vai entrar em contato para te ajudar a abrir sua empresa.",
   },
 
   // ── Ramo: trocar de contabilidade ────────────────────────────────────
@@ -203,7 +203,7 @@ export const FLUXO_CONVERSA: Record<string, NoConversa> = {
   "troca-contabilidade-7": {
     tipo: "pergunta_aberta",
     id: "troca-contabilidade-7",
-    pergunta: "Me informe seu telefone para que nossos especialistas entrem em contato.",
+    pergunta: "Me informe seu telefone para que nossa equipe entre em contato.",
     campo: "telefone",
     proximo: "troca-contabilidade-fim",
   },
@@ -211,7 +211,7 @@ export const FLUXO_CONVERSA: Record<string, NoConversa> = {
     tipo: "fim",
     id: "troca-contabilidade-fim",
     mensagem:
-      "Perfeito! Recebemos suas informações e em breve um especialista da BMN vai entrar em contato para te ajudar na troca de contabilidade.",
+      "Perfeito! Recebemos suas informações e em breve alguém da nossa equipe vai entrar em contato para te ajudar na troca de contabilidade.",
   },
 
   // ── Ramo ainda simples (resposta única) — a detalhar depois ─────────

@@ -65,7 +65,7 @@ const ITENS: HubItem[] = [
   {
     id: "bpo-financeiro",
     label: "BPO Financeiro",
-    href: "/bpo-financeiro",
+    href: "/servicos/bpo-financeiro",
     x: 815,
     y: 396,
     side: "left",
@@ -78,11 +78,20 @@ const ITENS: HubItem[] = [
     y: 500,
     side: "left",
   },
+  // Base do hub: dois cartões lado a lado
   {
     id: "folha-pagamento",
     label: "Folha de Pagamento",
     href: "/servicos/folha-de-pagamento",
-    x: CENTER_X - CARD_W / 2,
+    x: CENTER_X - CARD_W - 12,
+    y: 576,
+    side: "top",
+  },
+  {
+    id: "emissao-de-notas",
+    label: "Emissão de Notas",
+    href: "/servicos/emissao-de-notas",
+    x: CENTER_X + 12,
     y: 576,
     side: "top",
   },

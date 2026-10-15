@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { FLUXO_CONVERSA, NO_INICIAL, type CampoLead } from "@/lib/chatFlow";
+import { trackLead } from "@/lib/analytics";
 
 type Mensagem = { role: "user" | "bot"; text: string };
 type RespostasLead = Partial<Record<CampoLead, string>>;
@@ -62,6 +64,7 @@ export default function ChatWidget() {
         }),
       });
       if (!res.ok) throw new Error("Falha no envio");
+      trackLead("Chat do site");
       setLeadEnviado(true);
     } catch {
       setErroLead(true);
@@ -135,9 +138,11 @@ export default function ChatWidget() {
           <div className="flex items-center justify-between gap-2 rounded-t-[28px] bg-gradient-to-r from-secondary via-primary to-[#0f5c72] px-3 py-3 text-white shadow-sm">
             <div className="flex items-center gap-2">
               <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white shadow-lg shadow-secondary/20">
-                <img
+                <Image
                   src="/logo-bmn-st-black.svg"
                   alt="BMN"
+                  width={32}
+                  height={32}
                   className="h-8 w-8 object-contain"
                 />
                 <div className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-[#3fd55f] ring-2 ring-white" />
@@ -154,7 +159,7 @@ export default function ChatWidget() {
                 className="grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-white/25 bg-white/10 transition hover:bg-white/20"
                 aria-label="Atualizar chat"
               >
-                <img src="/atualizar.svg" alt="Atualizar" className="h-5 w-5 filter invert" />
+                <Image src="/atualizar.svg" alt="" width={20} height={20} className="h-5 w-5 filter invert" />
               </button>
               <button
                 type="button"

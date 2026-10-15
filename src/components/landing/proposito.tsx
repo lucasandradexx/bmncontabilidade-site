@@ -1,8 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { FaArrowRight } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
+
+const SEM_FRONTEIRAS = [
+  ["WhatsApp com quem cuida da conta", "Resposta rápida, sem central de atendimento"],
+  ["Reuniões on-line com os sócios", "Decisões tomadas com quem entende do assunto"],
+  ["Área do Cliente e documentos digitais", "Tudo em um lugar, a qualquer hora"],
+  ["Certificado digital ou procuração eletrônica", "Acesso aos órgãos federais, estaduais e municipais sem sair de casa"],
+  ["Monitoramento fiscal contínuo", "Pendências tratadas antes de virarem problema"],
+];
 
 const VALORES = [
   "Integridade",
@@ -75,29 +83,40 @@ export default function Proposito() {
               ))}
             </div>
 
-            <Link href="#contato" className="btn btn-primary w-full sm:w-auto justify-center">
+            <Link href="/#contato" className="btn btn-primary w-full sm:w-auto justify-center">
               Faça parte dessa história
             </Link>
           </div>
 
-          {/* ── Coluna direita: Imagem ── */}
+          {/* ── Coluna direita: Atendimento sem fronteiras ── */}
           <div
-            className={`hidden lg:flex items-center justify-center
-                        transition-all duration-700 delay-200
+            className={`transition-all duration-700 delay-200
                         ${inView
                           ? "opacity-100 translate-x-0"
                           : "opacity-0 translate-x-10"}`}
           >
-            <div
-              className="relative w-full overflow-hidden rounded-2xl shadow-xl"
-              style={{ height: 500 }}
-            >
-              <Image
-                src="/equipe.jpg"
-                alt="Ingrid barral — Fundadora da barral Contabilidade"
-                fill
-                className="object-cover object-center"
-              />
+            <div className="rounded-2xl gradient-primary p-6 text-white shadow-xl sm:p-8">
+              <span className="tag-section !text-cyan-200">Modelo de atendimento</span>
+              <h3 className="mt-2 text-2xl font-extrabold">Uma contabilidade sem fronteiras</h3>
+              <p className="mt-2 text-sm text-white/75">
+                Empresas de qualquer estado, com a mesma proximidade de um escritório ao lado.
+              </p>
+
+              <ul className="mt-6 space-y-4">
+                {SEM_FRONTEIRAS.map(([como, sente]) => (
+                  <li key={como} className="border-l-2 border-secondary pl-4">
+                    <p className="text-sm font-bold text-white">{como}</p>
+                    <p className="text-sm text-white/70">{sente}</p>
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/atendimento-digital"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan-200 hover:text-white"
+              >
+                Veja como funciona o atendimento digital <FaArrowRight className="text-xs" />
+              </Link>
             </div>
           </div>
 

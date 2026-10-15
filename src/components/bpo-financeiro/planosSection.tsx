@@ -1,15 +1,13 @@
 "use client";
 
 import { useRef } from "react";
+import { FaWhatsapp } from "react-icons/fa";
+import { MENSAGENS_WHATSAPP, waLink } from "@/lib/empresa";
 
 type Plano = {
   nome: string;
   descricao: string;
-  preco: string;
   recursos: string[];
-  destaque: boolean;
-  cta: string;
-  href: string;
 };
 
 type PlanosSectionProps = {
@@ -39,8 +37,11 @@ export default function PlanosSection({ planos }: PlanosSectionProps) {
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">Planos</p>
           <h2 className="mt-4 text-2xl font-black text-white sm:text-3xl lg:text-4xl">
-            Escolha o plano ideal para o momento da sua empresa
+            Um plano para cada momento da empresa
           </h2>
+          <p className="mt-4 text-base text-slate-200">
+            O escopo e o valor são definidos depois do Raio-X Financeiro, de acordo com o volume e a rotina da sua empresa.
+          </p>
         </div>
 
         <div className="relative mt-6 md:pl-14 md:pr-14">
@@ -70,40 +71,19 @@ export default function PlanosSection({ planos }: PlanosSectionProps) {
               <div
                 key={plano.nome}
                 data-plan-card
-                className={`group flex min-w-[300px] w-full snap-center flex-col rounded-3xl border p-5 shadow-sm sm:min-w-[340px] md:min-w-0 md:w-auto md:flex-1 md:p-6 ${
-                  plano.destaque
-                    ? "border-[#0ea5c7] bg-[#0f8198] text-white shadow-[#0ea5c7]/40"
-                    : "border-white/10 bg-white/5 text-white"
-                }`}
+                className="group flex min-w-[300px] w-full snap-center flex-col rounded-3xl border p-5 shadow-sm sm:min-w-[340px] md:min-w-0 md:w-auto md:flex-1 md:p-6 border-white/10 bg-white/5 text-white"
               >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <h3 className={`text-xl font-black sm:text-2xl ${plano.destaque ? "text-white" : "text-white"}`}>
-                  {plano.nome}
-                </h3>
-                {plano.destaque ? (
-                  <span className="inline-flex w-fit rounded-full bg-white/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white sm:text-xs">
-                    Mais escolhido
-                  </span>
-                ) : null}
-              </div>
-
-              <p className={`mt-3 text-base ${plano.destaque ? "text-cyan-50" : "text-slate-200"}`}>
-                {plano.descricao}
-              </p>
-              <p className={`mt-5 text-2xl font-black ${plano.destaque ? "text-white" : "text-white"}`}>
-                {plano.preco}
-              </p>
+              <h3 className="text-xl font-black text-white sm:text-2xl">{plano.nome}</h3>
+              <p className="mt-3 text-base text-slate-200">{plano.descricao}</p>
 
               <ul className="mt-6 space-y-3">
                 {plano.recursos.map((recurso) => (
                   <li
                     key={recurso}
-                    className={`flex items-start gap-3 text-sm ${plano.destaque ? "text-cyan-50" : "text-slate-200"}`}
+                    className="flex items-start gap-3 text-sm text-slate-200"
                   >
                     <span
-                      className={`mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                        plano.destaque ? "bg-white/15 text-white" : "bg-cyan-400/20 text-cyan-200"
-                      }`}
+                      className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold bg-cyan-400/20 text-cyan-200"
                     >
                       ✓
                     </span>
@@ -114,16 +94,13 @@ export default function PlanosSection({ planos }: PlanosSectionProps) {
 
                 <div className="mt-auto pt-6">
                   <a
-                    href={plano.href}
+                    href={waLink(`${MENSAGENS_WHATSAPP.propostaBpoFinanceiro.replace(/\.$/, "")} do ${plano.nome}.`)}
                     target="_blank"
-                    rel="noreferrer"
-                    className={`inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-bold uppercase tracking-wide transition ${
-                      plano.destaque
-                        ? "bg-[#0b3f5e] text-white hover:bg-[#0a344e]"
-                        : "bg-white text-slate-900 hover:bg-slate-100"
-                    }`}
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold uppercase tracking-wide text-slate-900 transition hover:bg-slate-100"
                   >
-                    {plano.cta}
+                    <FaWhatsapp className="text-base" />
+                    Quero uma proposta
                   </a>
                 </div>
               </div>

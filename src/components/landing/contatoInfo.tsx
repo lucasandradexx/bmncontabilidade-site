@@ -9,7 +9,7 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
-const WA_LINK = "https://wa.me/558194725310";
+import { EMAIL, ENDERECO_SEDE, MAPS_LINK, waLink } from "@/lib/empresa";
 
 interface InfoCard {
   icone: ReactNode;
@@ -23,20 +23,19 @@ const CARDS: InfoCard[] = [
     icone: <FaWhatsapp className="text-2xl" />,
     titulo: "Suporte pelo WhatsApp",
     conteudo: "Suporte imediato para assistência rápida e eficiente.",
-    href: WA_LINK,
+    href: waLink(),
   },
   {
     icone: <FaEnvelope className="text-2xl" />,
     titulo: "E-mail",
-    conteudo: "contato@bmncontabilidade.com",
-    href: "mailto:contato@bmncontabilidade.com",
+    conteudo: EMAIL,
+    href: `mailto:${EMAIL}`,
   },
   {
     icone: <FaMapMarkerAlt className="text-2xl" />,
-    titulo: "Endereço",
-    conteudo:
-      "R. Cap. José da Luz, 25 – Coelhos, Recife/PE – CEP 50070-540 Empresarial Joaquim Cardoso, salas 505/506",
-    href: "https://www.google.com/maps/search/?api=1&query=Rua+Capit%C3%A3o+Jos%C3%A9+da+Luz%2C+25%2C+Coelhos%2C+Recife%2C+PE%2C+50070-540",
+    titulo: "Sede",
+    conteudo: ENDERECO_SEDE,
+    href: MAPS_LINK,
   },
 ];
 
