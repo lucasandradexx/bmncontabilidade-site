@@ -11,10 +11,7 @@ services:
       - "127.0.0.1:5432:5432"   # só acessível pelo seu computador
     volumes:
       - dados_db:/var/lib/postgresql/data
-      # Na primeira subida (volume vazio), o Postgres roda estes arquivos em ordem alfabética.
-      # Em banco que já tem dados, nada acontece: rode as migrações novas à mão.
-      - ./db/migrations:/docker-entrypoint-initdb.d:ro
-
+      # As tabelas são criadas pelo "npm run migration", não pelo Docker.
 
 volumes:
   dados_db:
