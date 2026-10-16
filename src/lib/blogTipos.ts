@@ -9,7 +9,22 @@ export const STATUS_LABEL: Record<StatusPost, string> = {
   arquivado: "Arquivado",
 };
 
-// ── Registros (espelham as tabelas do schema DBML, em camelCase) ──
+export type PapelUsuario = "admin" | "editor";
+
+// ── Registros (espelham as tabelas do banco, em camelCase) ──
+
+export type UsuarioRegistro = {
+  id: number;
+  nome: string;
+  email: string; // sempre em minúsculas
+  senhaHash: string; // "sal:hash" (scrypt); nunca enviar ao navegador
+  papel: PapelUsuario;
+  ativo: boolean;
+  versaoSessao: number;
+  ultimoAcessoEm: string | null;
+  criadoEm: string;
+  editadoEm: string;
+};
 
 export type AutorRegistro = {
   id: number;
@@ -18,6 +33,7 @@ export type AutorRegistro = {
   fotoUrl: string | null;
   bio: string | null;
   registro: string | null;
+  usuarioId: number | null;
   ativo: boolean;
   criadoEm: string;
 };
@@ -46,6 +62,9 @@ export type PostRegistro = {
   tempoLeituraMin: number;
   publicadoEm: string | null;
   atualizadoEm: string | null;
+  criadoPorId: number;
+  editadoPorId: number;
+  publicadoPorId: number | null;
   criadoEm: string;
   editadoEm: string;
 };

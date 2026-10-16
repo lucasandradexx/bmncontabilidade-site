@@ -1,14 +1,16 @@
 // Login do painel /admin: sessão em cookie assinado (JWT HS256, httpOnly).
-//
-// PROVISÓRIO: usuário e senha vêm de ADMIN_USUARIO / ADMIN_SENHA, com "admin" / "admin" de reserva.
-// TODO(banco): trocar por uma tabela de usuários com senha em hash (bcrypt/argon2).
 
 import "server-only";
-import { createHash, randomBytes, timingSafeEqual } from "crypto";
+import { randomBytes } from "crypto";
 import { cache } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SignJWT, jwtVerify } from "jose";
+
+import { sql } from "@/lib/db";
+import type { UsuarioRegistro } from "@/lib/blogTipos";
+import { conferirSenha } from "@/lib/admin/senha";
+
 
 const COOKIE = "bmn_admin";
 const DURACAO_MS = 8 * 60 * 60 * 1000; // 8 horas
@@ -24,25 +26,31 @@ function chave() {
   return globalSessao.__bmnChaveAdmin;
 }
 
-function iguais(a: string, b: string) {
-  const hashA = createHash("sha256").update(a).digest();
-  const hashB = createHash("sha256").update(b).digest();
-  return timingSafeEqual(hashA, hashB);
+export async function autenticar(email: string, senha: string): Promise<Pick<UsuarioRegistro, "id" | "nome"> | null> {
+  const [usuario] = await sql<Pick<UsuarioRegistro, "id" | "nome" | "senhaHash" | "ativo">[]>`
+    select id, nome, senha_hash, ativo from usuarios where email = ${email.trim().toLowerCase()}
+  `;
+
+  if (!usuario || !usuario.ativo) return null;
+
+  const conferencia = await conferirSenha(senha, usuario.senhaHash);
+  if (!conferencia) return null;
+
+  await sql`
+    update usuarios set ultimo_acesso_em = now() where id = ${usuario.id}
+  `;
+
+  return { id: usuario.id, nome: usuario.nome };
 }
 
-export function credenciaisValidas(usuario: string, senha: string) {
-  const usuarioOk = iguais(usuario, process.env.ADMIN_USUARIO || "admin");
-  const senhaOk = iguais(senha, process.env.ADMIN_SENHA || "admin");
-  return usuarioOk && senhaOk;
-}
-
-export async function criarSessao(usuario: string) {
+export async function criarSessao(usuario: Pick<UsuarioRegistro, "id" | "nome">) {
   const expira = new Date(Date.now() + DURACAO_MS);
-  const token = await new SignJWT({ usuario })
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime(expira)
-    .sign(chave());
+  const token = await new SignJWT({ nome: usuario.nome })
+  .setSubject(String(usuario.id))
+  .setProtectedHeader({ alg: "HS256" })
+  .setIssuedAt()
+  .setExpirationTime(expira)
+  .sign(chave());
 
   (await cookies()).set(COOKIE, token, {
     httpOnly: true,
@@ -57,16 +65,19 @@ export async function encerrarSessao() {
   (await cookies()).delete(COOKIE);
 }
 
-export const lerSessao = cache(async (): Promise<{ usuario: string } | null> => {
+export const lerSessao = cache(async (): Promise<{ usuarioId: number; nome: string } | null> => {
   const token = (await cookies()).get(COOKIE)?.value;
   if (!token) return null;
   try {
     const { payload } = await jwtVerify(token, chave(), { algorithms: ["HS256"] });
-    return typeof payload.usuario === "string" ? { usuario: payload.usuario } : null;
+    const usuarioId = Number(payload.sub);
+    if (!Number.isInteger(usuarioId) || typeof payload.nome !== "string") return null;
+    return { usuarioId, nome: payload.nome };
   } catch {
     return null;
   }
 });
+
 
 // Usar no topo de toda página, Server Action e Route Handler do admin.
 export async function exigirSessao() {

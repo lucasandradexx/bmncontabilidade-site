@@ -17,7 +17,7 @@ import {
 } from "@/lib/blogDados";
 import { slugify, type StatusPost } from "@/lib/blogTipos";
 import { calcularTempoLeitura, sanitizarConteudo, textoPuro } from "@/lib/admin/sanitizar";
-import { credenciaisValidas, criarSessao, encerrarSessao, exigirSessao } from "@/lib/admin/sessao";
+import { autenticar, criarSessao, encerrarSessao, exigirSessao } from "@/lib/admin/sessao";
 
 export type Resultado = { ok: true; mensagem: string } | { ok: false; erro: string };
 
@@ -57,14 +57,13 @@ const textoOpcional = (max: number) =>
 // ─────────────────────────────────────────
 
 export async function entrar(_estado: string | null, formData: FormData): Promise<string | null> {
-  const usuario = String(formData.get("usuario") ?? "");
+  const email = String(formData.get("email") ?? "");
   const senha = String(formData.get("senha") ?? "");
 
-  if (!credenciaisValidas(usuario, senha)) {
-    return "Usuário ou senha incorretos.";
-  }
-
+  const usuario = await autenticar(email, senha);
+  if (!usuario) return "E-mail ou senha incorretos.";
   await criarSessao(usuario);
+
   redirect("/admin/posts");
 }
 
@@ -96,7 +95,7 @@ const esquemaPost = z.object({
 export type EntradaPost = z.input<typeof esquemaPost>;
 
 export async function salvarPostAcao(entrada: EntradaPost): Promise<Resultado> {
-  await exigirSessao();
+  const { usuarioId } = await exigirSessao();
 
   let id: number;
   let mensagem: string;
@@ -141,7 +140,7 @@ export async function salvarPostAcao(entrada: EntradaPost): Promise<Resultado> {
       atualizadoEm: d.marcarAtualizado ? new Date().toISOString() : (anterior?.atualizadoEm ?? null),
     };
 
-    const salvo = d.id ? await atualizarPost(d.id, dados) : await criarPost(dados);
+    const salvo = d.id ? await atualizarPost(d.id, dados, usuarioId) : await criarPost(dados, usuarioId);
     id = salvo.id;
 
     // Se o endereço mudou, a página antiga também precisa sair do cache.
@@ -163,9 +162,9 @@ export async function salvarPostAcao(entrada: EntradaPost): Promise<Resultado> {
 }
 
 export async function excluirPostAcao(id: number): Promise<Resultado> {
-  await exigirSessao();
+  const { usuarioId } = await exigirSessao();
   try {
-    const post = await excluirPost(id);
+    const post = await excluirPost(id, usuarioId);
     if (post) revalidatePath(`/blog/${post.slug}`);
   } catch (erro) {
     return falha(erro);

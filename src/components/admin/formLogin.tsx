@@ -11,8 +11,8 @@ export default function FormLogin() {
     <form action={acao} className="space-y-4">
       {erro && <Aviso tipo="erro">{erro}</Aviso>}
       <div>
-        <label htmlFor="usuario" className={LABEL}>Usuário</label>
-        <input id="usuario" name="usuario" required autoComplete="username" autoFocus className={INPUT} />
+        <label htmlFor="email" className={LABEL}>E-mail</label>
+        <input id="email" name="email" type="email" required autoComplete="username" autoFocus className={INPUT} />
       </div>
       <div>
         <label htmlFor="senha" className={LABEL}>Senha</label>

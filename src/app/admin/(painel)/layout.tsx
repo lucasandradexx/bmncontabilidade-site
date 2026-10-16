@@ -4,7 +4,7 @@ import NavAdmin from "@/components/admin/navAdmin";
 import { exigirSessao } from "@/lib/admin/sessao";
 
 export default async function PainelLayout({ children }: { children: React.ReactNode }) {
-  const { usuario } = await exigirSessao();
+  const { nome } = await exigirSessao();
 
   return (
     <div className="lg:flex">
@@ -19,7 +19,7 @@ export default async function PainelLayout({ children }: { children: React.React
           />
         </Link>
         <div className="lg:h-[calc(100%-4.5rem)]">
-          <NavAdmin usuario={usuario} />
+          <NavAdmin usuario={nome} />
         </div>
       </aside>
 

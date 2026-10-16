@@ -25,11 +25,6 @@ export default async function LoginPage() {
           <p className="mt-1 mb-6 text-sm text-slate-500">Entre para escrever e publicar artigos.</p>
           <FormLogin />
         </div>
-        {process.env.NODE_ENV === "development" && (!process.env.ADMIN_USUARIO || !process.env.ADMIN_SENHA) && (
-          <p className="mt-4 text-center text-xs text-amber-200/80">
-            Login provisório ativo (admin / admin). Defina ADMIN_USUARIO e ADMIN_SENHA antes de publicar o site.
-          </p>
-        )}
       </div>
     </main>
   );
