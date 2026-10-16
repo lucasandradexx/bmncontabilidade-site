@@ -18,6 +18,7 @@ import {
 import { slugify, type StatusPost } from "@/lib/blogTipos";
 import { calcularTempoLeitura, sanitizarConteudo, textoPuro } from "@/lib/admin/sanitizar";
 import { autenticar, criarSessao, encerrarSessao, exigirSessao } from "@/lib/admin/sessao";
+import { ipDaRequisicao, limparFalha, loginBloqueado, registrarFalha } from "@/lib/admin/limiteLogin";
 
 export type Resultado = { ok: true; mensagem: string } | { ok: false; erro: string };
 
@@ -60,8 +61,16 @@ export async function entrar(_estado: string | null, formData: FormData): Promis
   const email = String(formData.get("email") ?? "");
   const senha = String(formData.get("senha") ?? "");
 
+  const ip = await ipDaRequisicao();
+  if (await loginBloqueado(ip)) return "Bloqueio por exceder limite de tentativas, tente novamente mais tarde.";
+
   const usuario = await autenticar(email, senha);
-  if (!usuario) return "E-mail ou senha incorretos.";
+
+  if (!usuario) {
+    await registrarFalha(ip);
+    return "E-mail ou senha incorretos.";
+  };
+  await limparFalha(ip);
   await criarSessao(usuario);
 
   redirect("/admin/posts");

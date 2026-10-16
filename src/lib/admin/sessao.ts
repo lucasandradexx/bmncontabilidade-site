@@ -26,9 +26,9 @@ function chave() {
   return globalSessao.__bmnChaveAdmin;
 }
 
-export async function autenticar(email: string, senha: string): Promise<Pick<UsuarioRegistro, "id" | "nome"> | null> {
-  const [usuario] = await sql<Pick<UsuarioRegistro, "id" | "nome" | "senhaHash" | "ativo">[]>`
-    select id, nome, senha_hash, ativo from usuarios where email = ${email.trim().toLowerCase()}
+export async function autenticar(email: string, senha: string): Promise<Pick<UsuarioRegistro, "id" | "nome" | "versaoSessao"> | null> {
+  const [usuario] = await sql<Pick<UsuarioRegistro, "id" | "nome" | "senhaHash" | "ativo" | "versaoSessao">[]>`
+    select id, nome, senha_hash, ativo, versao_sessao from usuarios where email = ${email.trim().toLowerCase()}
   `;
 
   if (!usuario || !usuario.ativo) return null;
@@ -40,12 +40,12 @@ export async function autenticar(email: string, senha: string): Promise<Pick<Usu
     update usuarios set ultimo_acesso_em = now() where id = ${usuario.id}
   `;
 
-  return { id: usuario.id, nome: usuario.nome };
+  return { id: usuario.id, nome: usuario.nome, versaoSessao: usuario.versaoSessao };
 }
 
-export async function criarSessao(usuario: Pick<UsuarioRegistro, "id" | "nome">) {
+export async function criarSessao(usuario: Pick<UsuarioRegistro, "id" | "nome" | "versaoSessao">): Promise<void> {
   const expira = new Date(Date.now() + DURACAO_MS);
-  const token = await new SignJWT({ nome: usuario.nome })
+  const token = await new SignJWT({ nome: usuario.nome, versao: usuario.versaoSessao })
   .setSubject(String(usuario.id))
   .setProtectedHeader({ alg: "HS256" })
   .setIssuedAt()
@@ -65,19 +65,31 @@ export async function encerrarSessao() {
   (await cookies()).delete(COOKIE);
 }
 
+// Confere a assinatura do cookie e, no banco, se o usuário ainda está ativo e se a sessão
+// não foi revogada (versao_sessao aumenta ao revogar). Roda uma vez por requisição (cache).
 export const lerSessao = cache(async (): Promise<{ usuarioId: number; nome: string } | null> => {
   const token = (await cookies()).get(COOKIE)?.value;
   if (!token) return null;
+
+  let usuarioId: number;
+  let versao: number;
   try {
     const { payload } = await jwtVerify(token, chave(), { algorithms: ["HS256"] });
-    const usuarioId = Number(payload.sub);
-    if (!Number.isInteger(usuarioId) || typeof payload.nome !== "string") return null;
-    return { usuarioId, nome: payload.nome };
+    usuarioId = Number(payload.sub);
+    if (!Number.isInteger(usuarioId) || typeof payload.versao !== "number") return null;
+    versao = payload.versao;
   } catch {
-    return null;
+    return null; // assinatura inválida ou token expirado
   }
-});
 
+  // Fora do try: se o banco cair, o erro aparece em vez de deslogar todo mundo sem motivo.
+  const [usuario] = await sql<Pick<UsuarioRegistro, "nome" | "ativo" | "versaoSessao">[]>`
+    select nome, ativo, versao_sessao from usuarios where id = ${usuarioId}
+  `;
+  if (!usuario || !usuario.ativo || usuario.versaoSessao !== versao) return null;
+
+  return { usuarioId, nome: usuario.nome };
+});
 
 // Usar no topo de toda página, Server Action e Route Handler do admin.
 export async function exigirSessao() {
