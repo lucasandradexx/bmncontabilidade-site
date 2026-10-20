@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-import { MENSAGENS_WHATSAPP, waLink } from "@/lib/empresa";
+import { CRC_EMPRESA, MENSAGENS_WHATSAPP, waLink } from "@/lib/empresa";
 
 const FAIXA = [
   "100% digital",
   "Empresas de todos os estados",
   "Sócios no atendimento",
-  "CRC-PE 033381/O-0",
+  CRC_EMPRESA,
 ];
 
 const SLIDES = [

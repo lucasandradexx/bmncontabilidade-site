@@ -7,7 +7,7 @@ export const NOME_MARCA = "BMN Contabilidade Estratégica";
 export const ASSINATURA_MARCA =
   "BMN Contabilidade Estratégica — clareza para decidir, estratégia para crescer.";
 
-export const CRC_EMPRESA = "CRC-PE 033381/O-0";
+export const CRC_EMPRESA = "CRC-PE 031433/O-9";
 
 // TODO(sócios): razão social e CNPJ (exigidos na Política de Privacidade).
 export const RAZAO_SOCIAL: string | null = null;
