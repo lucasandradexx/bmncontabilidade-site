@@ -59,7 +59,10 @@ try {
     console.log(`executada: ${nome}`);
   }
 } catch (erro) {
-  console.error("Falha na migração:", erro.message);
+  // Erros de conexão (banco desligado, endereço errado) vêm sem mensagem, só com o código.
+  const motivo = erro.message || erro.code || String(erro);
+  const dica = erro.code === "ECONNREFUSED" ? " (o banco está ligado? confira o DATABASE_URL)" : "";
+  console.error(`Falha na migração: ${motivo}${dica}`);
   process.exitCode = 1;
 } finally {
   await sql.end();

@@ -13,10 +13,13 @@ const CABECALHOS_SEGURANCA = [
   // Recursos que o site não usa ficam bloqueados (vale também para o mapa embutido).
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
   // Só HTTPS por 2 anos. Sem "preload" de propósito: sair da lista de preload leva meses.
-  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" }
 ];
 
 const nextConfig: NextConfig = {
+
+  poweredByHeader: false,
+
   async headers() {
     return [{ source: "/:path*", headers: CABECALHOS_SEGURANCA }];
   },

@@ -12,6 +12,15 @@ const FAIXA = [
   CRC_EMPRESA,
 ];
 
+// O primeiro é o título principal (é o que o Google lê, pois vem no HTML inicial).
+const TITULOS = [
+  "A Reforma Tributária já começou. Sua empresa está preparada?",
+  "Seu negócio cresce. Seus impostos também precisam de estratégia.",
+  "Antes de pagar mais imposto, entenda o que muda com a Reforma.",
+  "Clareza fiscal para decidir. Estratégia para crescer.",
+  "Sua empresa em dia com o fisco, de qualquer lugar do Brasil.",
+];
+
 const SLIDES = [
   "/slides/slide-1.jpg",
   "/slides/slide-2.jpg",
@@ -19,12 +28,19 @@ const SLIDES = [
   "/slides/slide-4.jpg",
 ];
 
+// Um contador só move slides e títulos juntos; como são 4 slides e 5 títulos,
+// as combinações se repetem a cada 20 passos.
+const CICLO = SLIDES.length * TITULOS.length;
+
 export default function Hero() {
-  const [atual, setAtual] = useState(0);
-  // Troca slide a cada 5s
+  const [passo, setPasso] = useState(0);
+  const atual = passo % SLIDES.length;
+  const titulo = TITULOS[passo % TITULOS.length];
+
+  // Troca slide e título a cada 5s
   useEffect(() => {
     const t = setInterval(() => {
-      setAtual((p) => (p + 1) % SLIDES.length);
+      setPasso((p) => (p + 1) % CICLO);
     }, 5000);
 
     return () => clearInterval(t);
@@ -61,14 +77,21 @@ export default function Hero() {
       {/* Conteúdo */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 sm:pt-28 sm:pb-24 lg:py-28">
         <div className="max-w-xl sm:max-w-2xl">
-          {/* Título */}
-          <h1
-            className={`font-extrabold text-white leading-[1.08] mb-5
-                        text-[clamp(1.95rem,8.5vw,3.25rem)]
-                        opacity-0 animate-fade-up`}
+          {/* Título rotativo. Todos os títulos ficam invisíveis na mesma célula do grid
+              para reservar a altura do maior: assim o texto abaixo não pula na troca. */}
+          <div
+            className={`grid font-extrabold text-white leading-[1.08] mb-5
+                        text-[clamp(1.95rem,8.5vw,3.25rem)]`}
           >
-            A Reforma Tributária já começou. Sua empresa está preparada?
-          </h1>
+            {TITULOS.map((t) => (
+              <span key={t} aria-hidden className="invisible col-start-1 row-start-1">
+                {t}
+              </span>
+            ))}
+            <h1 key={titulo} className="col-start-1 row-start-1 opacity-0 animate-fade-up">
+              {titulo}
+            </h1>
+          </div>
 
           {/* Descrição */}
           <p
@@ -119,7 +142,7 @@ export default function Hero() {
             {SLIDES.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setAtual(i)}
+                onClick={() => setPasso(i)}
                 aria-label={`Slide ${i + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer
                             ${i === atual
