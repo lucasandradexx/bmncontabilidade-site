@@ -7,7 +7,12 @@ import { trackWhatsappClick } from "@/lib/analytics";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+
+// GA4 e Google Ads usam o mesmo gtag.js: carrega uma vez e configura os dois.
+// Os eventos (clique no WhatsApp, envio de formulário) vão para ambos.
+const GTAG_IDS = [GA_ID, GOOGLE_ADS_ID].filter(Boolean) as string[];
 
 export default function Analytics() {
   const pathname = usePathname();
@@ -36,14 +41,14 @@ export default function Analytics() {
         </Script>
       )}
 
-      {GA_ID && (
+      {GTAG_IDS.length > 0 && (
         <>
           <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_IDS[0]}`}
             strategy="afterInteractive"
           />
-          <Script id="ga4" strategy="afterInteractive">
-            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${GA_ID}');`}
+          <Script id="gtag" strategy="afterInteractive">
+            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());${GTAG_IDS.map((id) => `gtag('config','${id}');`).join("")}`}
           </Script>
         </>
       )}
